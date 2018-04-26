@@ -12,21 +12,6 @@ UltraSlackBot is on development. Pull Requests [are welcome](https://github.com/
 
 ## Installation
 
-### Option 1: Go Get
-
-```bash
-$ go get github.com/DiSiqueira/UltraSlackBot
-$ UltraSlackBot -h
-```
-
-### Option 2: From source
-
-```bash
-$ go get gopkg.in/ini.v1
-$ git clone https://github.com/DiSiqueira/UltraSlackBot.git
-$ cd UltraSlackBot/
-$ go build *.go
-```
 
 ## Usage
 
