@@ -1,0 +1,13 @@
+version: '3'
+services:
+
+  ultraslackbot:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      args:
+        - SLACK_TOKEN=${SLACK_TOKEN}
+    volumes:
+      - .:/go/src/github.com/disiqueira/ultraslackbot
+    environment:
+      SLACK_TOKEN: ${SLACK_TOKEN}

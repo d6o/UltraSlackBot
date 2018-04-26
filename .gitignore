@@ -1,0 +1,5 @@
+.env
+/vendor/
+
+/plugins/*.so
+/plugins/*/vendor

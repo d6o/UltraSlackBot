@@ -1,0 +1,14 @@
+hash: a8f3618ac773fb3f70eb31c20a0b85235c05c2794140eb93e7e651db5d5a7022
+updated: 2018-04-01T20:31:20.14976888+02:00
+imports:
+- name: github.com/gorilla/websocket
+  version: eb925808374e5ca90c83401a40d711dc08c0c0f6
+- name: github.com/inconshreveable/mousetrap
+  version: 76626ae9c91c4f2a10f34cad8ce83ea42c93bb75
+- name: github.com/nlopes/slack
+  version: 8ab4d0b364ef1e9af5d102531da20d5ec902b6c4
+- name: github.com/spf13/cobra
+  version: a1f051bc3eba734da4772d60e2d677f47cf93ef4
+- name: github.com/spf13/pflag
+  version: 1cd4a0c365d95803411bec89fb7b76bade17053b
+testImports: []

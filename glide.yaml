@@ -1,0 +1,6 @@
+package: github.com/disiqueira/ultraslackbot
+import:
+- package: github.com/nlopes/slack
+  version: ^0.2.0
+- package: github.com/spf13/cobra
+  version: ^0.0.2
