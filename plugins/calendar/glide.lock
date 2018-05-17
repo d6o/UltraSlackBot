@@ -1,0 +1,16 @@
+hash: 8cb74c2e8e5285952a7bde8af426db82346377c8ab090832273cd7057af066be
+updated: 2018-05-15T21:37:08.911624724Z
+imports:
+- name: github.com/akamensky/argparse
+  version: 95911c018170ab2092b96d15985030390b4535af
+- name: github.com/disiqueira/ultraslackbot
+  version: 9dd5f1df0356602e6f5b7767e45e2f66bd38f9b3
+  subpackages:
+  - internal/context
+  - pkg/bot
+  - pkg/slack
+- name: github.com/gorilla/websocket
+  version: eb925808374e5ca90c83401a40d711dc08c0c0f6
+- name: github.com/nlopes/slack
+  version: 8ab4d0b364ef1e9af5d102531da20d5ec902b6c4
+testImports: []
