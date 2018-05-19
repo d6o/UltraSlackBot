@@ -35,7 +35,7 @@ func (c *choose) handleMessageEvent(messageEvent slack.Message, botUser bot.User
 	rightOne := options[rand.Intn(len(options))]
 
 	outMessages := []slack.Message{
-		slack.NewMessage(rightOne, messageEvent.Channel(), botUser.ID()),
+		slack.NewMessage(rightOne, messageEvent.Channel(), botUser),
 		}
 
 	return outMessages, nil

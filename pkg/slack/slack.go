@@ -16,7 +16,12 @@ type (
 	Message interface {
 		Text() string
 		Channel() string
-		UserID() string
+		User() User
+	}
+
+	User interface {
+		ID() string
+		Name() string
 	}
 
 	Event struct {
@@ -28,6 +33,7 @@ type (
 
 	UserInfo struct {
 		id string
+		name string
 	}
 )
 
@@ -77,6 +83,7 @@ func (s *Slack) UserInfo() (*UserInfo, error) {
 	}
 	userInfo := &UserInfo{
 		id:info.UserID,
+		name:info.User,
 	}
 	return userInfo, nil
 }
@@ -91,4 +98,8 @@ func (e *Event) Data() interface{} {
 
 func (u UserInfo) ID() string {
 	return u.id
+}
+
+func (u UserInfo) Name() string {
+	return u.name
 }

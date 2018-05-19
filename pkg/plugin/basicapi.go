@@ -31,7 +31,7 @@ func (c *BasicCommand) HandleEvent(event slack.Event, botUser bot.UserInfo, matc
 		return nil, nil
 	}
 
-	if msg.UserID() == botUser.ID() {
+	if msg.User().ID() == botUser.ID() {
 		return nil, nil
 	}
 
@@ -45,7 +45,7 @@ func (c *BasicCommand) HandleEvent(event slack.Event, botUser bot.UserInfo, matc
 	}
 
 	outMessages := []slack.Message{
-		slack.NewMessage(textResponse, msg.Channel(), botUser.ID()),
+		slack.NewMessage(textResponse, msg.Channel(), botUser),
 	}
 
 	return outMessages, nil

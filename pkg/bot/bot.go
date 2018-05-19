@@ -24,6 +24,7 @@ type (
 
 	UserInfo interface {
 		ID() string
+		Name() string
 	}
 
 	Event interface {
@@ -40,7 +41,7 @@ type (
 	Message interface {
 		Text() string
 		Channel() string
-		UserID() string
+		User() slack.User
 	}
 )
 
@@ -111,3 +112,4 @@ func (b *Bot) UserInfo() (UserInfo, error) {
 	}
 	return b.userInfo, nil
 }
+
