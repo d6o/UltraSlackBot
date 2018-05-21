@@ -28,7 +28,7 @@ type (
 	}
 )
 
-func (y *yt) Load() error {
+func (y *yt) Start() error {
 	key := os.Getenv(googleKeyEnvName)
 	if key == "" {
 		return fmt.Errorf("enviroiment variable %s not found", googleKeyEnvName)
@@ -45,10 +45,6 @@ func (y *yt) Load() error {
 
 	y.youtubeService = service
 
-	return nil
-}
-
-func (y *yt) Start() error {
 	return nil
 }
 
@@ -71,10 +67,6 @@ func (y *yt) command(text string) (string, error) {
 	}
 
 	text = strings.Join(args[1:], " ")
-
-	if err := y.Load(); err != nil {
-		return "", fmt.Errorf("error loading API : %v", err)
-	}
 
 	call := y.youtubeService.Search.List("id,snippet").
 		Q(text).Type("video").
