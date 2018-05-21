@@ -19,6 +19,7 @@ type (
 
 	Handler interface {
 		Execute(event slack.Event, botUser UserInfo) ([]slack.Message, error)
+		Start() error
 		Name() string
 	}
 
@@ -34,7 +35,7 @@ type (
 
 	SlackClient interface {
 		Listen() chan slack.Event
-		Send(slack.Message) error
+		Send(slack.Message)
 		UserInfo() (*slack.UserInfo, error)
 	}
 
@@ -80,9 +81,7 @@ func (b *Bot) updateUserInfo(ctx context.Context, ticker *time.Ticker) {
 
 func (b *Bot) handleMessages(ctx context.Context) {
 	for msg := range b.msgList {
-		if err := b.slack.Send(msg); err != nil {
-			usbCtx.ErrLogger(ctx).Printf("error: %s message: %+v", err, msg)
-		}
+		b.slack.Send(msg)
 	}
 }
 

@@ -29,6 +29,10 @@ type (
 	}
 )
 
+func (c *cnpj) Start() error {
+	return nil
+}
+
 func (c *cnpj) Name() string {
 	return "cnpj"
 }

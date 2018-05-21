@@ -1,0 +1,6 @@
+package: github.com/disiqueira/ultraslackbot/plugins/youtube
+import:
+- package: google.golang.org/api
+  subpackages:
+  - googleapi/transport
+  - youtube/v3

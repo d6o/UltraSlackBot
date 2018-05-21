@@ -18,6 +18,10 @@ func NewLogger(logger *log.Logger) *Logger {
 	}
 }
 
+func (l *Logger) Start() error {
+	return nil
+}
+
 func (l *Logger) Execute(message slack.Event, botUser bot.UserInfo) ([]slack.Message, error) {
 	log.Printf("Name: %s Data: %+v\n",message.Name(), message.Data())
 	return nil, nil

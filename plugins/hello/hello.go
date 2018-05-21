@@ -12,21 +12,26 @@ type (
 	hello struct { }
 )
 
-func (c *hello) Name() string {
+
+func (h *hello) Start() error {
+	return nil
+}
+
+func (h *hello) Name() string {
 	return "hello"
 }
 
-func (c *hello) Execute(event slack.Event, botUser bot.UserInfo) ([]slack.Message, error) {
+func (h *hello) Execute(event slack.Event, botUser bot.UserInfo) ([]slack.Message, error) {
 	msg, err := slack.EventToMessage(event)
 	if err != nil {
 		return nil, nil
 	}
-	return c.handleMessageEvent(msg, botUser)
+	return h.handleMessageEvent(msg, botUser)
 }
 
-func (c *hello) handleMessageEvent(messageEvent slack.Message, botUser bot.UserInfo) ([]slack.Message, error) {
+func (h *hello) handleMessageEvent(messageEvent slack.Message, botUser bot.UserInfo) ([]slack.Message, error) {
 	args := strings.Split(strings.TrimSpace(messageEvent.Text()), " ")
-	if args[0] != c.Name() {
+	if args[0] != h.Name() {
 		return nil, nil
 	}
 

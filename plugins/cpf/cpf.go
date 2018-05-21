@@ -29,6 +29,10 @@ type (
 	}
 )
 
+func (c *cpf) Start() error {
+	return nil
+}
+
 func (c *cpf) Name() string {
 	return "cpf"
 }

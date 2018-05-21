@@ -7,7 +7,9 @@ services:
       dockerfile: ./Dockerfile
       args:
         - SLACK_TOKEN=${SLACK_TOKEN}
+        - GOOGLE_KEY=${GOOGLE_KEY}
     volumes:
       - .:/go/src/github.com/disiqueira/ultraslackbot
     environment:
       SLACK_TOKEN: ${SLACK_TOKEN}
+      GOOGLE_KEY: ${GOOGLE_KEY}

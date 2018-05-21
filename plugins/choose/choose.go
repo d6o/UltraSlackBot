@@ -12,6 +12,10 @@ type (
 	choose struct { }
 )
 
+func (c *choose) Start() error {
+	return nil
+}
+
 func (c *choose) Name() string {
 	return "choose"
 }

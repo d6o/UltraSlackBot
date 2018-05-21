@@ -1,15 +1,15 @@
 package slack
 
 import (
-	slackClient "github.com/nlopes/slack"
 	"fmt"
+	slackClient "github.com/nlopes/slack"
 )
 
 type (
 	Slack struct {
-		token string
-		api   *slackClient.Client
-		rtm   *slackClient.RTM
+		token     string
+		api       *slackClient.Client
+		rtm       *slackClient.RTM
 		eventList chan Event
 	}
 
@@ -32,17 +32,13 @@ type (
 	EventName string
 
 	UserInfo struct {
-		id string
+		id   string
 		name string
 	}
 )
 
 const (
 	eventBufferSize = 1024
-)
-
-var (
-	paramsMessageSlack = slackClient.PostMessageParameters{AsUser: true, EscapeText: false}
 )
 
 func New(token string) *Slack {
@@ -71,9 +67,8 @@ func (s *Slack) manageMessages() {
 	}
 }
 
-func (s *Slack) Send(msg Message) error {
-	_, _, err := s.api.PostMessage(msg.Channel(), msg.Text(), paramsMessageSlack)
-	return err
+func (s *Slack) Send(msg Message) {
+	s.rtm.SendMessage(s.rtm.NewOutgoingMessage(msg.Text(), msg.Channel()))
 }
 
 func (s *Slack) UserInfo() (*UserInfo, error) {
@@ -82,8 +77,8 @@ func (s *Slack) UserInfo() (*UserInfo, error) {
 		return nil, fmt.Errorf("AuthTest err: %s", err.Error())
 	}
 	userInfo := &UserInfo{
-		id:info.UserID,
-		name:info.User,
+		id:   info.UserID,
+		name: info.User,
 	}
 	return userInfo, nil
 }

@@ -1,12 +1,12 @@
 package main
 
 import (
-	"strings"
 	"math/rand"
-
-	"github.com/disiqueira/ultraslackbot/pkg/slack"
-	"github.com/disiqueira/ultraslackbot/pkg/bot"
 	"strconv"
+	"strings"
+
+	"github.com/disiqueira/ultraslackbot/pkg/bot"
+	"github.com/disiqueira/ultraslackbot/pkg/slack"
 )
 
 const (
@@ -14,24 +14,28 @@ const (
 )
 
 type (
-	random struct { }
+	random struct{}
 )
 
-func (c *random) Name() string {
+func (r *random) Start() error {
+	return nil
+}
+
+func (r *random) Name() string {
 	return "random"
 }
 
-func (c *random) Execute(event slack.Event, botUser bot.UserInfo) ([]slack.Message, error) {
+func (r *random) Execute(event slack.Event, botUser bot.UserInfo) ([]slack.Message, error) {
 	msg, err := slack.EventToMessage(event)
 	if err != nil {
 		return nil, nil
 	}
-	return c.handleMessageEvent(msg, botUser)
+	return r.handleMessageEvent(msg, botUser)
 }
 
-func (c *random) handleMessageEvent(messageEvent slack.Message, botUser bot.UserInfo) ([]slack.Message, error) {
+func (r *random) handleMessageEvent(messageEvent slack.Message, botUser bot.UserInfo) ([]slack.Message, error) {
 	args := strings.Split(strings.TrimSpace(messageEvent.Text()), " ")
-	if args[0] != c.Name() {
+	if args[0] != r.Name() {
 		return nil, nil
 	}
 
@@ -45,7 +49,7 @@ func (c *random) handleMessageEvent(messageEvent slack.Message, botUser bot.User
 
 	outMessages := []slack.Message{
 		slack.NewMessage(strconv.Itoa(rand.Intn(maxNumber)), messageEvent.Channel(), botUser),
-		}
+	}
 
 	return outMessages, nil
 }

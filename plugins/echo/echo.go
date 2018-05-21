@@ -11,21 +11,25 @@ type (
 	echo struct { }
 )
 
-func (c *echo) Name() string {
+func (e *echo) Start() error {
+	return nil
+}
+
+func (e *echo) Name() string {
 	return "echo"
 }
 
-func (c *echo) Execute(event slack.Event, botUser bot.UserInfo) ([]slack.Message, error) {
+func (e *echo) Execute(event slack.Event, botUser bot.UserInfo) ([]slack.Message, error) {
 	msg, err := slack.EventToMessage(event)
 	if err != nil {
 		return nil, nil
 	}
-	return c.handleMessageEvent(msg, botUser)
+	return e.handleMessageEvent(msg, botUser)
 }
 
-func (c *echo) handleMessageEvent(messageEvent slack.Message, botUser bot.UserInfo) ([]slack.Message, error) {
+func (e *echo) handleMessageEvent(messageEvent slack.Message, botUser bot.UserInfo) ([]slack.Message, error) {
 	args := strings.Split(strings.TrimSpace(messageEvent.Text()), " ")
-	if len(args) < 2 || args[0] != c.Name() {
+	if len(args) < 2 || args[0] != e.Name() {
 		return nil, nil
 	}
 

@@ -55,19 +55,23 @@ type (
 	}
 )
 
-func (c *dilma) Name() string {
+func (d *dilma) Start() error {
+	return nil
+}
+
+func (d *dilma) Name() string {
 	return "dilma"
 }
 
-func (c *dilma) Execute(event slack.Event, botUser bot.UserInfo) ([]slack.Message, error) {
-	return c.HandleEvent(event, botUser, c.matcher, c.command)
+func (d *dilma) Execute(event slack.Event, botUser bot.UserInfo) ([]slack.Message, error) {
+	return d.HandleEvent(event, botUser, d.matcher, d.command)
 }
 
-func (c *dilma) matcher() *regexp.Regexp {
+func (d *dilma) matcher() *regexp.Regexp {
 	return regexp.MustCompile(pattern)
 }
 
-func (c *dilma) command(text string) (string, error) {
+func (d *dilma) command(text string) (string, error) {
 	return fmt.Sprintf(":dilma: %s", frasesDilma[rand.Intn(len(frasesDilma))]), nil
 }
 

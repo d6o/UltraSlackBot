@@ -50,20 +50,25 @@ type (
 	}
 )
 
-func (c *lula) Name() string {
+func (l *lula) Start() error {
+	return nil
+}
+
+func (l *lula) Name() string {
 	return "lula"
 }
 
-func (c *lula) Execute(event slack.Event, botUser bot.UserInfo) ([]slack.Message, error) {
-	return c.HandleEvent(event, botUser, c.matcher, c.command)
+func (l *lula) Execute(event slack.Event, botUser bot.UserInfo) ([]slack.Message, error) {
+	return l.HandleEvent(event, botUser, l.matcher, l.command)
 }
 
-func (c *lula) matcher() *regexp.Regexp {
+func (l *lula) matcher() *regexp.Regexp {
 	return regexp.MustCompile(pattern)
 }
 
-func (c *lula) command(text string) (string, error) {
+func (l *lula) command(text string) (string, error) {
 	return fmt.Sprintf(":lula: %s", frasesLula[rand.Intn(len(frasesLula))]), nil
 }
 
 var CustomPlugin lula
+
