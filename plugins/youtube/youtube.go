@@ -16,7 +16,7 @@ import (
 )
 
 const (
-	pattern          = "(?i)^(yt)"
+	pattern          = "(?i)^(youtube|you|yt)"
 	googleKeyEnvName = "GOOGLE_KEY"
 	videoURL         = "http://youtu.be/%s"
 )
@@ -62,7 +62,7 @@ func (y *yt) matcher() *regexp.Regexp {
 
 func (y *yt) command(text string) (string, error) {
 	args := strings.Split(strings.TrimSpace(text), " ")
-	if len(args) < 2 || args[0] != y.Name() {
+	if len(args) < 2 {
 		return "", nil
 	}
 

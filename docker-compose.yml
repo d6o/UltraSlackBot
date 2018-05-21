@@ -8,8 +8,10 @@ services:
       args:
         - SLACK_TOKEN=${SLACK_TOKEN}
         - GOOGLE_KEY=${GOOGLE_KEY}
+        - GOOGLE_CX=${GOOGLE_CX}
     volumes:
       - .:/go/src/github.com/disiqueira/ultraslackbot
     environment:
       SLACK_TOKEN: ${SLACK_TOKEN}
       GOOGLE_KEY: ${GOOGLE_KEY}
+      GOOGLE_CX: ${GOOGLE_CX}
