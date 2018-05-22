@@ -10,13 +10,14 @@ import (
 	"github.com/disiqueira/ultraslackbot/pkg/plugin"
 	"github.com/disiqueira/ultraslackbot/pkg/slack"
 
+	"net/url"
 )
 
 const (
-	pattern          = "(?i)\\b(googleimages|gimages|images|gis)\\b"
+	pattern          = "(?i)\\b(googleimages|gimages|image|gis)\\b"
 	googleKeyEnvName = "GOOGLE_KEY"
 	googleCXEnvName  = "GOOGLE_CX"
-	searchURL 		 = "https://www.googleapis.com/customsearch/v1?key=%s&cx=%s&q=%s&searchType=image"
+	searchURL 		 = "https://www.googleapis.com/customsearch/v1"
 )
 
 type (
@@ -68,9 +69,21 @@ func (gi *googleImages) command(text string) (string, error) {
 
 	text = strings.Join(args[1:], " ")
 
-	data := &googleImagesResponse{}
-	err := plugin.GetJSON(fmt.Sprintf(searchURL,gi.googleKey, gi.cx, text), data)
+	var gisURL *url.URL
+	gisURL, err := url.Parse(searchURL)
 	if err != nil {
+		return "", err
+	}
+
+	parameters := url.Values{}
+	parameters.Add("key",gi.googleKey)
+	parameters.Add("cx",gi.cx)
+	parameters.Add("searchType", "image")
+	parameters.Add("q", text)
+	gisURL.RawQuery = parameters.Encode()
+
+	data := &googleImagesResponse{}
+	if err := plugin.GetJSON(gisURL.String(), data); err != nil {
 		return "", err
 	}
 
