@@ -96,7 +96,7 @@ func (gi *googleImages) command(text string) (string, error) {
 		}
 	}
 
-	return fmt.Sprintf("%s [%s]", title, link), nil
+	return fmt.Sprintf("%s - %s", title, link), nil
 }
 
 var CustomPlugin googleImages
