@@ -24,6 +24,10 @@ type (
 	}
 )
 
+func (c *catFact) Start() error {
+	return nil
+}
+
 func (c *catFact) Name() string {
 	return "catFact"
 }

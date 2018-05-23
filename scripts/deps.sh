@@ -10,7 +10,7 @@ for d in *; do
     if [[ -d ${d} ]]; then
         cd ${d}
         if [ -f glide.yaml ]; then
-        glide install
+            glide install
         fi
         cd ..
     fi

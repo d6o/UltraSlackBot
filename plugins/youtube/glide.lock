@@ -1,0 +1,21 @@
+hash: 63aa8f0b9769b02db54d66837d4d493f2252748178c3ab761f4ce70d6ecb118e
+updated: 2018-05-21T21:00:25.092079818+02:00
+imports:
+- name: github.com/gorilla/websocket
+  version: eb925808374e5ca90c83401a40d711dc08c0c0f6
+- name: github.com/nlopes/slack
+  version: 8ab4d0b364ef1e9af5d102531da20d5ec902b6c4
+- name: golang.org/x/net
+  version: f315505cf3349909cdf013ea56690da34e96a451
+  subpackages:
+  - context
+  - context/ctxhttp
+- name: google.golang.org/api
+  version: b1ecfb35ad07443b92ba0cdac16f21787b978d93
+  subpackages:
+  - gensupport
+  - googleapi
+  - googleapi/internal/uritemplates
+  - googleapi/transport
+  - youtube/v3
+testImports: []

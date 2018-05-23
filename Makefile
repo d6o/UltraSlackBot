@@ -23,3 +23,7 @@ ins: clean deps plugins build install-bin
 install-bin:
 	@echo "Installing ultraslackbot"
 	@/bin/sh -c "./scripts/install-bin.sh"
+
+docker-up:
+	@echo "Wait..."
+	@docker-compose up -d

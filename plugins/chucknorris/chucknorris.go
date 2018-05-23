@@ -24,6 +24,10 @@ type (
 	}
 )
 
+func (c *chuckNorris) Start() error {
+	return nil
+}
+
 func (c *chuckNorris) Name() string {
 	return "chuckNorris"
 }

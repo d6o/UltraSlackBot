@@ -56,6 +56,11 @@ func (p *Plugin) Load(logger *log.Logger) ([]bot.Handler, error) {
 			logger.Printf("%s error: unexpected type from module symbol", fileName)
 			continue
 		}
+
+		if err := customPlugin.Start(); err != nil {
+			logger.Printf("%s error starting: %s", fileName, err.Error())
+			continue
+		}
 		handlers = append(handlers, customPlugin)
 	}
 

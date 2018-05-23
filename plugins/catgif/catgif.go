@@ -22,6 +22,10 @@ type (
 	}
 )
 
+func (c *catGif) Start() error {
+	return nil
+}
+
 func (c *catGif) Name() string {
 	return "catGif"
 }

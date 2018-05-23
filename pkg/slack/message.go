@@ -14,15 +14,20 @@ type (
 	message struct {
 		text string
 		channel string
-		userID string
+		user User
+	}
+
+	user struct {
+		name string
+		id string
 	}
 )
 
-func NewMessage(text, channel, userID string) Message {
+func NewMessage(text, channel string, user User) Message {
 	return &message{
 		text:text,
 		channel:channel,
-		userID:userID,
+		user:user,
 	}
 }
 
@@ -34,8 +39,8 @@ func (m message) Channel() string {
 	return m.channel
 }
 
-func (m message) UserID() string {
-	return m.userID
+func (m message) User() User {
+	return m.user
 }
 
 func (m message) Args() []string {
@@ -46,10 +51,25 @@ func (m message) Command() string {
 	return m.Args()[0]
 }
 
+func NewUser(id, name string) User {
+	return &user{
+		id:id,
+		name:name,
+	}
+}
+
+func (u user) ID() string {
+	return u.id
+}
+
+func (u user) Name() string {
+	return u.name
+}
+
 func EventToMessage(event Event) (Message, error) {
 	switch ev := event.Data().(type) {
 	case *slack.MessageEvent:
-		return NewMessage(ev.Text, ev.Channel, ev.User), nil
+		return NewMessage(ev.Text, ev.Channel, NewUser(ev.User, ev.Username)), nil
 	}
 	return nil, errors.New("event is not a messageEvent")
 }
