@@ -8,18 +8,18 @@ import (
 	"bytes"
 	"io"
 	"strings"
-	"strconv"
-	"math/rand"
+	"errors"
+	"log"
 )
 
 const DB_FILE = "calendar_db.csv"
-const DB_COLUMNS = "id,date,title,description\n"
-const DB_COLUMNS_TITLE = "#\tDate\tTitle\tDesc."
+const DB_COLUMNS = "date,title,description\n"
+const DB_COLUMNS_TITLE = "Date\tTitle\tDesc."
 
 type Calendar interface {
 	Add(date time.Time, title, description string) (string, error)
 	List(date time.Time) (string, error)
-	Remove(id int) (string, error)
+	Remove(title string) (string, error)
 }
 
 type CalendarImp struct {
@@ -27,25 +27,22 @@ type CalendarImp struct {
 }
 
 func (calendar *CalendarImp) Add(date time.Time, title, description string) (string, error) {
-	retStr := ""
-	retStr += "date = " + date.Format("02/01/2006")
-	retStr += "title = " + title
-	retStr += "description = " + description
-
 	createDbIfNeeded()
-	file, err := os.OpenFile(DB_FILE, os.O_APPEND, 0755)
+	file, err := os.OpenFile(DB_FILE, os.O_WRONLY|os.O_APPEND, 0755)
 	if err != nil {
 		return "", err
 	}
+	defer file.Close()
 	writer := csv.NewWriter(file)
-	r := rand.New(rand.NewSource(time.Now().UnixNano()))
-	id := r.Int()
+	defer writer.Flush()
+
 	record := []string{
-		strconv.Itoa(id),
 		date.Format("02/01/2006"),
 		title,
 		description,
 	}
+	log.Print("CalendarImp.Add(): record = ")
+	log.Print(record)
 
 	err = writer.Write(record)
 	if err != nil {
@@ -62,8 +59,10 @@ func (calendar *CalendarImp) List(date time.Time) (string, error){
 		return "", err
 	}
 	for {
+		log.Print("List(): reading record")
 		record, err := reader.Read()
 		if err == io.EOF {
+			log.Print("List(): EOF")
 			break;
 		}
 		if err != nil {
@@ -75,7 +74,8 @@ func (calendar *CalendarImp) List(date time.Time) (string, error){
 	return retStr, nil
 }
 
-func (calendar *CalendarImp) Remove(id int) (string, error) {
+func (calendar *CalendarImp) Remove(title string) (string, error) {
+	log.Print("Remove()")
 	reader, err := calendar.readDb()
 	if err != nil {
 		return "", err
@@ -84,12 +84,15 @@ func (calendar *CalendarImp) Remove(id int) (string, error) {
 	if err != nil {
 		return "", err
 	}
+	defer file.Close()
 	writer := csv.NewWriter(file)
-	header, err := reader.Read()
+	defer writer.Flush()
+	/*header, err := reader.Read()
 	if err != nil {
 		return "", err
 	}
-	writer.Write(header)
+	writer.Write(header)*/
+	found := false
 	for {
 		record, err := reader.Read()
 		if err == io.EOF {
@@ -98,46 +101,48 @@ func (calendar *CalendarImp) Remove(id int) (string, error) {
 		if err != nil {
 			return "", err
 		}
-		recId, err := strconv.Atoi(record[0])
-		if err != nil {
-			return "", err
-		}
-		if recId != id {
+		if record[1] != title {
 			error := writer.Write(record)
 			if error != nil {
 				return "", error
 			}
+			log.Print("'" + record[1] + "' != '" + title + "'")
+		} else {
+			found = true
 		}
 	}
-	return "Entry removed", nil
+	if found {
+		return "Entry removed", nil
+	} else {
+		return "", errors.New("Entry not found")
+	}
 }
 
 func createDbIfNeeded()  error {
-	_, error := os.Open(DB_FILE)
-	if error == nil || !os.IsNotExist(error) {
-		return nil, error
+	log.Print("createDbIfNeeded()")
+	file, error := os.Open(DB_FILE)
+	if error == nil {
+		file.Close()
+		return error
 	}
-	file, error := os.Create(DB_FILE)
+	log.Print("createDbIfNeeded(): will create db")
+	file, error = os.Create(DB_FILE)
 	if error != nil {
-		return nil, error
+		return error
 	}
+	file.Close()
 	//_, error = file.WriteString(DB_COLUMNS)
 	//return file, error
-}
-
-func openDbForWrite() (*os.File, error) {
-	err := createDbIfNeeded()
-	if err != nil {
-		return nil, err
-	}
-	return os.OpenFile(DB_FILE, os.O_RDWR, 0755)
+	return nil
 }
 
 func (calendar *CalendarImp) readDb() (*csv.Reader, error) {
+	log.Print("readDb()")
 	createDbIfNeeded()
 	data, error := ioutil.ReadFile(DB_FILE)
 	if error != nil {
 		return nil, error
 	}
+	log.Print("readDb(): dump = " + string(data))
 	return csv.NewReader(bytes.NewReader(data)), nil
 }

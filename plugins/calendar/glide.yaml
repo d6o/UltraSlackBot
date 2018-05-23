@@ -1,3 +1,0 @@
-  package: github.com/disiqueira/ultraslackbot/plugins/calendar
-  import:
-  - package: github.com/akamensky/argparse

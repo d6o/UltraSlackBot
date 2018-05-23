@@ -1,66 +1,85 @@
 package cmd
 
 import (
-	"../pkg"
-	"github.com/akamensky/argparse"
-	"fmt"
+	"github.com/disiqueira/ultraslackbot/plugins/calendar/pkg"
 	"time"
 	"errors"
-	"strconv"
+	"log"
 )
 
+const (
+	CMD_LIST = "list"
+	CMD_ADD = "add"
+	CMD_REMOVE = "remove"
+	MSG_NO_CMD = "Use one of the commands: '" + CMD_LIST + "', '" + CMD_ADD + "' or '" + CMD_REMOVE
+	MSG_LIST = "Usage: list [DD/MM/YYYY]"
+	MSG_ADD = "Usage: add DD/MM/YYYY Title [Description]"
+	MSG_REMOVE = "Usage: remove TITLE"
+)
 
 type ArgParser struct {
 	Calendar pkg.Calendar
 }
 
 func (argParser ArgParser) ParseCmd(args []string) (string, error) {
-	retString := ""
-	parser := argparse.NewParser("Calendar", "Keep an event calendar for your chat!")
-	list := parser.NewCommand("list", "List events")
-	//list.Usage("list [DATE]\nDATE in format DD/MM/YYYY")
-	list_date := list.String("d", "date", &argparse.Options{Required: false, Help: "Max date"})
+	log.Print("ParseCmd()")
+	if len(args) == 0 || args[0] == "" {
+		return "", errors.New(MSG_NO_CMD)
+	}
+	command := args[0]
+	parameters := args[1:len(args)]
+	switch command {
+	case CMD_LIST:
+		return argParser.list(parameters)
+	case CMD_ADD:
+		return argParser.add(parameters)
+	case CMD_REMOVE:
+		return argParser.remove(parameters)
+	default:
+		return "", errors.New("Invalid command. " + MSG_NO_CMD)
+	}
+}
 
-	add := parser.NewCommand("add", "Add new event")
-	//add.Usage("add DATE TITLE \nDATE in format DD/MM/YYYY")
-	add_date := add.String("d", "date", &argparse.Options{Required: true, Help: "Event date"})
-	add_title := add.String("t", "title", &argparse.Options{Required: true, Help: "Event title"})
-	add_description := add.String("de", "description", &argparse.Options{Required: false, Help: "Event description"})
+func (argParser ArgParser) list(args []string) (string, error) {
+	log.Print("list()")
+	var date time.Time
+	if (len(args) > 0) {
+		if (args[0] == "-h" || args[0] == "--help") {
+			return MSG_LIST, nil
+		}
+		var err error
+		date, err = time.Parse("02/01/2006", args[0])
+		if err != nil {
+			return "", errors.New("Invalid parameter date: " + err.Error() +
+				"\n" + MSG_LIST)
+		}
+	}
+	return argParser.Calendar.List(date)
+}
 
-	remove := parser.NewCommand("remove", "Remove event")
-	//remove.Usage("remove ID")
-	remove_id := remove.String("i", "id", &argparse.Options{Required: true, Help: "Event entry Id"})
-
-	// Parse input
-	err := parser.Parse(args)
+func (argParser ArgParser) add(args []string) (string, error) {
+	log.Print("add()")
+	if len(args) < 2 {
+		return "", errors.New("Invalid parameters. \n" + MSG_ADD)
+	}
+	t, err := time.Parse("02/01/2006", args[0])
 	if err != nil {
-		// In case of error print error and print usage
-		// This can also be done by passing -h or --help flags
-		fmt.Print(parser.Usage(err))
+		return "", errors.New(err.Error() + "\n" + MSG_ADD)
 	}
-	if list.Happened() {
-		t, err := time.Parse("02/01/2006", *list_date)
-		if err != nil {
-			return "", err
-		}
-		retString, err = argParser.Calendar.List(t)
+	if len(args[1]) == 0 || args[1] == "" {
+		return "",errors.New("Invalid title. \n" + MSG_ADD)
 	}
-	if add.Happened() {
-		t, err := time.Parse("02/01/2006", *add_date)
-		if err != nil {
-			return "", err
-		}
-		if len(*add_title) == 0 {
-			return "",errors.New("Invalid title")
-		}
-		retString, err = argParser.Calendar.Add(t, *add_title, *add_description)
+	desc := ""
+	if len(args) >= 3 {
+		desc = args[2]
 	}
-	if remove.Happened() {
-		i, err := strconv.Atoi(*remove_id)
-		if err != nil {
-			return "",err
-		}
-		retString, err = argParser.Calendar.Remove(i)
+	return argParser.Calendar.Add(t, args[1], desc)
+}
+
+func (argParser ArgParser) remove(args []string) (string, error) {
+	log.Print("remove()")
+	if len (args) < 1 {
+		return "", errors.New("Invalid parameters. \n" + MSG_REMOVE)
 	}
-	return retString, nil
+	return argParser.Calendar.Remove(args[0])
 }
