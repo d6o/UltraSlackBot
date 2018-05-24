@@ -21,6 +21,10 @@ type (
 var myCalendar = pkg.CalendarImp{}
 var argParser = cmd.ArgParser{Calendar: &myCalendar}
 
+func (c *calendarPlugin) Start() error {
+	return nil
+}
+
 func (c *calendarPlugin) Name() string {
 	return name
 }
@@ -45,7 +49,7 @@ func (c *calendarPlugin) handleMessageEvent(messageEvent slack.Message, botUser 
 		retStr = err.Error()
 	}
 	outMessages := []slack.Message{
-		slack.NewMessage("```"+retStr+"```", messageEvent.Channel(), botUser.ID()),
+		slack.NewMessage("```"+retStr+"```", messageEvent.Channel(), botUser),
 	}
 	log.Print("Calendar end")
 	return outMessages, nil
