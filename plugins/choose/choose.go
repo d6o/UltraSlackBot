@@ -12,7 +12,7 @@ type (
 	choose struct { }
 )
 
-func (c *choose) Start() error {
+func (c *choose) Start(specs bot.Specs) error {
 	return nil
 }
 

@@ -29,7 +29,7 @@ type (
 	}
 )
 
-func (c *cnpj) Start() error {
+func (c *cnpj) Start(specs bot.Specs) error {
 	return nil
 }
 

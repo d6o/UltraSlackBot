@@ -50,7 +50,7 @@ type (
 	}
 )
 
-func (l *lula) Start() error {
+func (l *lula) Start(specs bot.Specs) error {
 	return nil
 }
 

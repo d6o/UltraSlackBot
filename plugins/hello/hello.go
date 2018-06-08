@@ -13,7 +13,7 @@ type (
 )
 
 
-func (h *hello) Start() error {
+func (h *hello) Start(specs bot.Specs) error {
 	return nil
 }
 

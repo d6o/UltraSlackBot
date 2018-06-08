@@ -55,7 +55,7 @@ type (
 	}
 )
 
-func (d *dilma) Start() error {
+func (d *dilma) Start(specs bot.Specs) error {
 	return nil
 }
 

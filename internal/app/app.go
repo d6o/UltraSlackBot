@@ -5,22 +5,23 @@ import (
 	"github.com/spf13/cobra"
 	"log"
 	"os"
+
 	usbCtx "github.com/disiqueira/ultraslackbot/internal/context"
 	"github.com/disiqueira/ultraslackbot/pkg/slack"
 	"github.com/disiqueira/ultraslackbot/pkg/bot"
 	"github.com/disiqueira/ultraslackbot/internal/plugin"
 	"github.com/disiqueira/ultraslackbot/pkg/handlers"
+	"github.com/disiqueira/ultraslackbot/internal/conf"
 )
 
 type (
-	App struct {
-	}
+	App struct {}
 )
 
 const (
 	successExitCode = 0
 	errorExitCode   = 1
-	slackTokenEnvVar   = "SLACK_TOKEN"
+	slackTokenEnvVar   = "SLACKTOKEN"
 )
 
 func New() *App {
@@ -35,19 +36,23 @@ func (a *App) Run(cmd *cobra.Command, args []string) {
 	ctx = usbCtx.WithOutLogger(ctx, outLogger)
 	ctx = usbCtx.WithErrLogger(ctx, errLogger)
 
-	slackToken := os.Getenv(slackTokenEnvVar)
-	if slackToken == "" {
-		errLogger.Printf("you need to inform your slack token. export %s={YOUR_TOKEN}", slackTokenEnvVar)
+	specs := conf.Load()
+
+	outLogger.Printf("Configurations: %+v", specs.All())
+
+	slackToken, ok := specs.Get(slackTokenEnvVar)
+	if !ok {
+		errLogger.Printf("config missing %s", slackTokenEnvVar)
 		os.Exit(errorExitCode)
 	}
 
 	pluginReader := plugin.New()
-	loadedHandlers, err := pluginReader.Load(errLogger)
+	loadedHandlers, err := pluginReader.Load(errLogger, specs)
 	if err != nil {
 		errLogger.Printf("Loading plugins error: %s", err.Error())
 	}
 
-	slackClient := slack.New(slackToken)
+	slackClient := slack.New(slackToken.(string))
 	b := bot.New(slackClient, append(a.defaultHandlers(ctx), loadedHandlers...))
 	b.Run(ctx)
 	os.Exit(successExitCode)

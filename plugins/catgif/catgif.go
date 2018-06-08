@@ -22,7 +22,7 @@ type (
 	}
 )
 
-func (c *catGif) Start() error {
+func (c *catGif) Start(specs bot.Specs) error {
 	return nil
 }
 

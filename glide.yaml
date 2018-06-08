@@ -3,4 +3,8 @@ import:
 - package: github.com/nlopes/slack
   version: ^0.2.0
 - package: github.com/spf13/cobra
-  version: ^0.0.2
+  version: ^0.0.3
+- package: github.com/micro/go-config
+  version: ^0.6.0
+- package: github.com/spf13/pflag
+  version: ^1.0.1

@@ -19,7 +19,7 @@ type (
 
 	Handler interface {
 		Execute(event slack.Event, botUser UserInfo) ([]slack.Message, error)
-		Start() error
+		Start(specs Specs) error
 		Name() string
 	}
 
@@ -43,6 +43,12 @@ type (
 		Text() string
 		Channel() string
 		User() slack.User
+	}
+
+	Specs interface {
+		All() map[string]interface{}
+		Get(k string) (interface{}, bool)
+		Set(k, v string)
 	}
 )
 

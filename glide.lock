@@ -1,14 +1,77 @@
-hash: a8f3618ac773fb3f70eb31c20a0b85235c05c2794140eb93e7e651db5d5a7022
-updated: 2018-04-01T20:31:20.14976888+02:00
+hash: 2820bb54cf68ddaf1d6a4e49a5517264a60ced786e2346cd528739857a590d00
+updated: 2018-06-09T11:32:37.42548693+02:00
 imports:
+- name: github.com/bitly/go-simplejson
+  version: 0c965951289cce37dec52ad1f34200fefc816777
+- name: github.com/BurntSushi/toml
+  version: a368813c5e648fee92e5f6c30e3944ff9d5e8895
+- name: github.com/CrowdSurge/banner
+  version: 8c0e79dc5ff70fb2919f0d662f44fd72ccdf9be2
+  subpackages:
+  - fonts
+- name: github.com/fsnotify/fsnotify
+  version: 4da3e2cfbabc9f751898f250b49f2439785783a1
+- name: github.com/ghodss/yaml
+  version: e9ed3c6dfb39bb1a32197cb10d527906fe4da4b6
 - name: github.com/gorilla/websocket
   version: eb925808374e5ca90c83401a40d711dc08c0c0f6
+- name: github.com/hashicorp/hcl
+  version: 8f6b1344a92ff8877cf24a5de9177bf7d0a2a187
+  subpackages:
+  - hcl/ast
+  - hcl/parser
+  - hcl/scanner
+  - hcl/strconv
+  - hcl/token
+  - json/parser
+  - json/scanner
+  - json/token
+- name: github.com/imdario/mergo
+  version: 9316a62528ac99aaecb4e47eadd6dc8aa6533d58
 - name: github.com/inconshreveable/mousetrap
   version: 76626ae9c91c4f2a10f34cad8ce83ea42c93bb75
+- name: github.com/martinusso/go-docs
+  version: 81905d575a58d3c6c690c32da2e430411c5de145
+  subpackages:
+  - cnpj
+  - cpf
+- name: github.com/micro/go-config
+  version: 36fd59604ea6c0a01007f71a77ac287ca2e044bc
+  subpackages:
+  - encoder
+  - encoder/hcl
+  - encoder/json
+  - encoder/toml
+  - encoder/xml
+  - encoder/yaml
+  - reader
+  - reader/json
+  - source
+  - source/envvar
+  - source/file
 - name: github.com/nlopes/slack
   version: 8ab4d0b364ef1e9af5d102531da20d5ec902b6c4
 - name: github.com/spf13/cobra
-  version: a1f051bc3eba734da4772d60e2d677f47cf93ef4
+  version: ef82de70bb3f60c65fb8eebacbb2d122ef517385
 - name: github.com/spf13/pflag
-  version: 1cd4a0c365d95803411bec89fb7b76bade17053b
+  version: 583c0c0531f06d5278b7d917446061adc344b5cd
+- name: golang.org/x/net
+  version: 66aacef3dd8a676686c7ae3716979581e8b03c47
+  subpackages:
+  - context
+  - context/ctxhttp
+- name: golang.org/x/sys
+  version: 9aade4d3a3b7e6d876cd3823ad20ec45fc035402
+  subpackages:
+  - unix
+- name: google.golang.org/api
+  version: 4d8a15a217e46f47fb724569d74702bec99852d3
+  subpackages:
+  - gensupport
+  - googleapi
+  - googleapi/internal/uritemplates
+  - googleapi/transport
+  - youtube/v3
+- name: gopkg.in/yaml.v2
+  version: eb3733d160e74a9c7e442f435eb3bea458e1d19f
 testImports: []

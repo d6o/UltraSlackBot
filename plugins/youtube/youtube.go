@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"net/http"
-	"os"
 	"regexp"
 	"strings"
 
@@ -17,7 +16,7 @@ import (
 
 const (
 	pattern          = "(?i)^(youtube|you|yt)"
-	googleKeyEnvName = "GOOGLE_KEY"
+	googleKeyEnvName = "GOOGLEKEY"
 	videoURL         = "http://youtu.be/%s"
 )
 
@@ -28,14 +27,14 @@ type (
 	}
 )
 
-func (y *yt) Start() error {
-	key := os.Getenv(googleKeyEnvName)
-	if key == "" {
-		return fmt.Errorf("enviroiment variable %s not found", googleKeyEnvName)
+func (y *yt) Start(specs bot.Specs) error {
+	key, ok := specs.Get(googleKeyEnvName)
+	if !ok {
+		return fmt.Errorf("config %s not found", googleKeyEnvName)
 	}
 
 	client := &http.Client{
-		Transport: &transport.APIKey{Key: key},
+		Transport: &transport.APIKey{Key: key.(string)},
 	}
 
 	service, err := youtube.New(client)

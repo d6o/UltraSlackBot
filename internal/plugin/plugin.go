@@ -2,11 +2,12 @@ package plugin
 
 import (
 	"fmt"
-	"github.com/disiqueira/ultraslackbot/pkg/bot"
 	"io/ioutil"
 	"log"
 	"plugin"
 	"strings"
+
+	"github.com/disiqueira/ultraslackbot/pkg/bot"
 )
 
 type (
@@ -22,7 +23,7 @@ func New() *Plugin {
 	return &Plugin{}
 }
 
-func (p *Plugin) Load(logger *log.Logger) ([]bot.Handler, error) {
+func (p *Plugin) Load(logger *log.Logger, specs bot.Specs) ([]bot.Handler, error) {
 	files, err := ioutil.ReadDir(dirName)
 	if err != nil {
 		return nil, err
@@ -57,7 +58,7 @@ func (p *Plugin) Load(logger *log.Logger) ([]bot.Handler, error) {
 			continue
 		}
 
-		if err := customPlugin.Start(); err != nil {
+		if err := customPlugin.Start(specs); err != nil {
 			logger.Printf("%s error starting: %s", fileName, err.Error())
 			continue
 		}

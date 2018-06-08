@@ -24,7 +24,7 @@ type (
 	}
 )
 
-func (c *catFact) Start() error {
+func (c *catFact) Start(specs bot.Specs) error {
 	return nil
 }
 

@@ -11,7 +11,7 @@ type (
 	echo struct { }
 )
 
-func (e *echo) Start() error {
+func (e *echo) Start(specs bot.Specs) error {
 	return nil
 }
 

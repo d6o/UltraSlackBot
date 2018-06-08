@@ -17,7 +17,7 @@ type (
 	random struct{}
 )
 
-func (r *random) Start() error {
+func (r *random) Start(specs bot.Specs) error {
 	return nil
 }
 

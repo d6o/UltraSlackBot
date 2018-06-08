@@ -24,7 +24,7 @@ type (
 	}
 )
 
-func (c *chuckNorris) Start() error {
+func (c *chuckNorris) Start(specs bot.Specs) error {
 	return nil
 }
 

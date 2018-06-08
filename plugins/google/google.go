@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"net/url"
-	"os"
 	"regexp"
 	"strings"
 
@@ -14,8 +13,8 @@ import (
 
 const (
 	pattern          = "(?i)\\b(google|search|gse)\\b"
-	googleKeyEnvName = "GOOGLE_KEY"
-	googleCXEnvName  = "GOOGLE_CX"
+	googleKeyEnvName = "GOOGLEKEY"
+	googleCXEnvName  = "GOOGLECX"
 	searchURL        = "https://www.googleapis.com/customsearch/v1"
 )
 
@@ -35,16 +34,18 @@ type (
 	}
 )
 
-func (gi *google) Start() error {
-	gi.googleKey = os.Getenv(googleKeyEnvName)
-	if gi.googleKey == "" {
-		return fmt.Errorf("enviroiment variable %s not found", googleKeyEnvName)
+func (gi *google) Start(specs bot.Specs) error {
+	key, ok := specs.Get(googleKeyEnvName)
+	if !ok {
+		return fmt.Errorf("config %s not found", googleKeyEnvName)
 	}
+	gi.googleKey = key.(string)
 
-	gi.cx = os.Getenv(googleCXEnvName)
-	if gi.cx == "" {
-		return fmt.Errorf("enviroiment variable %s not found", googleCXEnvName)
+	cx, ok := specs.Get(googleCXEnvName)
+	if !ok {
+		return fmt.Errorf("config %s not found", googleCXEnvName)
 	}
+	gi.cx = cx.(string)
 
 	return nil
 }

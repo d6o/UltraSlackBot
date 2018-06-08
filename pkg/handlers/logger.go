@@ -18,7 +18,7 @@ func NewLogger(logger *log.Logger) *Logger {
 	}
 }
 
-func (l *Logger) Start() error {
+func (l *Logger) Start(spec bot.Specs) error {
 	return nil
 }
 

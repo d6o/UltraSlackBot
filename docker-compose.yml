@@ -6,12 +6,12 @@ services:
       context: .
       dockerfile: ./Dockerfile
       args:
-        - SLACK_TOKEN=${SLACK_TOKEN}
-        - GOOGLE_KEY=${GOOGLE_KEY}
-        - GOOGLE_CX=${GOOGLE_CX}
+        - USB_SLACKTOKEN=${USB_SLACKTOKEN}
+        - USB_GOOGLEKEY=${USB_GOOGLEKEY}
+        - USB_GOOGLECX=${USB_GOOGLECX}
     volumes:
       - .:/go/src/github.com/disiqueira/ultraslackbot
     environment:
-      SLACK_TOKEN: ${SLACK_TOKEN}
-      GOOGLE_KEY: ${GOOGLE_KEY}
-      GOOGLE_CX: ${GOOGLE_CX}
+      USB_SLACKTOKEN: ${USB_SLACKTOKEN}
+      USB_GOOGLEKEY: ${USB_GOOGLEKEY}
+      USB_GOOGLECX: ${USB_GOOGLECX}
