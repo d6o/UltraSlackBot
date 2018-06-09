@@ -1,9 +1,9 @@
 package plugin
 
 import (
-	"fmt"
 	"io/ioutil"
 	"log"
+	"path"
 	"plugin"
 	"strings"
 
@@ -39,7 +39,7 @@ func (p *Plugin) Load(logger *log.Logger, specs bot.Specs) ([]bot.Handler, error
 			continue
 		}
 		logger.Printf("Loading: %s \n", file.Name())
-		fileName := fmt.Sprintf("./plugins/%s", file.Name())
+		fileName := path.Join("./plugins/", file.Name())
 		plug, err := plugin.Open(fileName)
 		if err != nil {
 			logger.Printf("%s error: %s", fileName, err.Error())
@@ -67,3 +67,4 @@ func (p *Plugin) Load(logger *log.Logger, specs bot.Specs) ([]bot.Handler, error
 
 	return handlers, nil
 }
+

@@ -2,19 +2,25 @@ package bot
 
 import (
 	"context"
+	"errors"
 	usbCtx "github.com/disiqueira/ultraslackbot/internal/context"
 	"github.com/disiqueira/ultraslackbot/pkg/slack"
 	"time"
-	"errors"
+	"strings"
 )
 
 type (
 	Bot struct {
 		token    string
-		handlers []Handler
+		handlers map[string]*HandlerManager
 		slack    SlackClient
 		msgList  chan Message
 		userInfo UserInfo
+	}
+
+	HandlerManager struct {
+		handler Handler
+		enabled bool
 	}
 
 	Handler interface {
@@ -54,29 +60,45 @@ type (
 
 const messageBufferSize = 1024
 
-func New(slack SlackClient, handlers []Handler) *Bot {
+func New(slack SlackClient) *Bot {
+
+
 	return &Bot{
-		handlers: handlers,
 		slack:    slack,
 		msgList:  make(chan Message, messageBufferSize),
 	}
 }
 
+func (b *Bot) SetHandlers(handlers []Handler) {
+	handlerManagers := map[string]*HandlerManager{}
+
+	for _, h := range handlers {
+		handlerManagers[strings.ToLower(h.Name())] = &HandlerManager{
+			handler: h,
+			enabled: true,
+		}
+	}
+
+	b.handlers = handlerManagers
+}
+
 func (b *Bot) Run(ctx context.Context) {
 	go b.handleMessages(ctx)
 
-	ticker := time.NewTicker(time.Minute * 5)
-	go b.updateUserInfo(ctx, ticker)
+	t := time.NewTicker(time.Minute * 5)
+	go b.updateUserInfo(ctx, t)
 
 	for event := range b.slack.Listen() {
-		for _, handler := range b.handlers {
-			go b.execHandler(ctx, event, handler)
+		for _, h := range b.handlers {
+			if h.enabled {
+				go b.execHandler(ctx, event, h.handler)
+			}
 		}
 	}
 }
 
 func (b *Bot) updateUserInfo(ctx context.Context, ticker *time.Ticker) {
-	for ; true ; <-ticker.C {
+	for ; true; <-ticker.C {
 		userInfo, err := b.slack.UserInfo()
 		if err != nil {
 			usbCtx.ErrLogger(ctx).Printf("UpdateUserInfo error: %s", err)
@@ -118,3 +140,22 @@ func (b *Bot) UserInfo() (UserInfo, error) {
 	return b.userInfo, nil
 }
 
+func (b *Bot) Handlers() map[string]*HandlerManager {
+	return b.handlers
+}
+
+func (h *HandlerManager) Disable() {
+	h.enabled = false
+}
+
+func (h *HandlerManager) Enable() {
+	h.enabled = true
+}
+
+func (h *HandlerManager) Enabled() bool {
+	return h.enabled
+}
+
+func (h *HandlerManager) Name() string {
+	return h.handler.Name()
+}

@@ -1,4 +1,4 @@
-package handlers
+package logger
 
 import (
 	"github.com/disiqueira/ultraslackbot/pkg/slack"
@@ -12,7 +12,7 @@ type (
 	}
 )
 
-func NewLogger(logger *log.Logger) *Logger {
+func New(logger *log.Logger) *Logger {
 	return &Logger{
 		logger:logger,
 	}

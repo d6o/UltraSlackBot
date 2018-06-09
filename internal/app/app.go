@@ -10,8 +10,9 @@ import (
 	"github.com/disiqueira/ultraslackbot/pkg/slack"
 	"github.com/disiqueira/ultraslackbot/pkg/bot"
 	"github.com/disiqueira/ultraslackbot/internal/plugin"
-	"github.com/disiqueira/ultraslackbot/pkg/handlers"
 	"github.com/disiqueira/ultraslackbot/internal/conf"
+	"github.com/disiqueira/ultraslackbot/pkg/handlers/logger"
+	"github.com/disiqueira/ultraslackbot/internal/handlers/admin"
 )
 
 type (
@@ -53,13 +54,15 @@ func (a *App) Run(cmd *cobra.Command, args []string) {
 	}
 
 	slackClient := slack.New(slackToken.(string))
-	b := bot.New(slackClient, append(a.defaultHandlers(ctx), loadedHandlers...))
+	b := bot.New(slackClient)
+	b.SetHandlers(append(a.defaultHandlers(ctx, b), loadedHandlers...))
 	b.Run(ctx)
 	os.Exit(successExitCode)
 }
 
-func (a *App) defaultHandlers(ctx context.Context) []bot.Handler {
+func (a *App) defaultHandlers(ctx context.Context, b *bot.Bot) []bot.Handler {
 	return []bot.Handler{
-		handlers.NewLogger(usbCtx.OutLogger(ctx)),
+		logger.New(usbCtx.OutLogger(ctx)),
+		admin.New(b),
 		}
 }
