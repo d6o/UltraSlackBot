@@ -9,9 +9,11 @@ services:
         - USB_SLACKTOKEN=${USB_SLACKTOKEN}
         - USB_GOOGLEKEY=${USB_GOOGLEKEY}
         - USB_GOOGLECX=${USB_GOOGLECX}
+        - USB_WOLFRAMKEY=${USB_WOLFRAMKEY}
     volumes:
       - .:/go/src/github.com/disiqueira/ultraslackbot
     environment:
       USB_SLACKTOKEN: ${USB_SLACKTOKEN}
       USB_GOOGLEKEY: ${USB_GOOGLEKEY}
       USB_GOOGLECX: ${USB_GOOGLECX}
+      USB_WOLFRAMKEY: ${USB_WOLFRAMKEY}

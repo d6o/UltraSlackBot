@@ -39,16 +39,15 @@ func (c *BasicCommand) HandleEvent(event slack.Event, botUser bot.UserInfo, matc
 		return nil, nil
 	}
 
+	var outMessages []slack.Message
 	textResponse, err := command(msg.Text())
-	if err != nil {
-		return nil, err
+	if textResponse != "" {
+		outMessages = []slack.Message{
+			slack.NewMessage(textResponse, msg.Channel(), botUser),
+		}
 	}
 
-	outMessages := []slack.Message{
-		slack.NewMessage(textResponse, msg.Channel(), botUser),
-	}
-
-	return outMessages, nil
+	return outMessages, err
 }
 
 func (c *BasicCommand) matcher() *regexp.Regexp {
