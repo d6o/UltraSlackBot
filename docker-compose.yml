@@ -10,6 +10,7 @@ services:
         - USB_GOOGLEKEY=${USB_GOOGLEKEY}
         - USB_GOOGLECX=${USB_GOOGLECX}
         - USB_WOLFRAMKEY=${USB_WOLFRAMKEY}
+        - USB_LASTFMKEY=${USB_LASTFMKEY}
     volumes:
       - .:/go/src/github.com/disiqueira/ultraslackbot
     environment:
@@ -17,3 +18,4 @@ services:
       USB_GOOGLEKEY: ${USB_GOOGLEKEY}
       USB_GOOGLECX: ${USB_GOOGLECX}
       USB_WOLFRAMKEY: ${USB_WOLFRAMKEY}
+      USB_LASTFMKEY: ${USB_LASTFMKEY}
