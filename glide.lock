@@ -1,14 +1,10 @@
-hash: 2820bb54cf68ddaf1d6a4e49a5517264a60ced786e2346cd528739857a590d00
-updated: 2018-06-09T11:32:37.42548693+02:00
+hash: bd42e0517751f6cc4c1eb479c73f11c75c7a146eab9e4d39617ce2b15c03ef18
+updated: 2018-07-11T22:58:56.939709Z
 imports:
 - name: github.com/bitly/go-simplejson
   version: 0c965951289cce37dec52ad1f34200fefc816777
 - name: github.com/BurntSushi/toml
   version: a368813c5e648fee92e5f6c30e3944ff9d5e8895
-- name: github.com/CrowdSurge/banner
-  version: 8c0e79dc5ff70fb2919f0d662f44fd72ccdf9be2
-  subpackages:
-  - fonts
 - name: github.com/fsnotify/fsnotify
   version: 4da3e2cfbabc9f751898f250b49f2439785783a1
 - name: github.com/ghodss/yaml
@@ -30,11 +26,6 @@ imports:
   version: 9316a62528ac99aaecb4e47eadd6dc8aa6533d58
 - name: github.com/inconshreveable/mousetrap
   version: 76626ae9c91c4f2a10f34cad8ce83ea42c93bb75
-- name: github.com/martinusso/go-docs
-  version: 81905d575a58d3c6c690c32da2e430411c5de145
-  subpackages:
-  - cnpj
-  - cpf
 - name: github.com/micro/go-config
   version: 36fd59604ea6c0a01007f71a77ac287ca2e044bc
   subpackages:

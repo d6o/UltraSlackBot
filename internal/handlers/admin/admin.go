@@ -4,8 +4,9 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/disiqueira/ultraslackbot/pkg/bot"
+	"github.com/disiqueira/ultraslackbot/internal/bot"
 	"github.com/disiqueira/ultraslackbot/pkg/slack"
+	"context"
 )
 
 type (
@@ -20,11 +21,7 @@ func New(bot *bot.Bot) *Admin {
 	}
 }
 
-func (a *Admin) Start(spec bot.Specs) error {
-	return nil
-}
-
-func (a *Admin) Execute(message slack.Event, botUser bot.UserInfo) ([]slack.Message, error) {
+func (a *Admin) Execute(ctx context.Context, message slack.Event, botUser bot.UserInfo) ([]slack.Message, error) {
 	msg, err := slack.EventToMessage(message)
 	if err != nil {
 		return nil, nil
@@ -85,7 +82,14 @@ func (a *Admin) disable(args []string) []string {
 	if len(args) < 1 {
 		return nil
 	}
+
 	handler := args[0]
+	if handler == "admin" {
+		return []string{
+			fmt.Sprintf("%s can not be disabled", handler),
+		}
+	}
+
 	a.ensureHandlerStatus(false, handler)
 	return []string{
 		fmt.Sprintf("%s is now disabled", handler),

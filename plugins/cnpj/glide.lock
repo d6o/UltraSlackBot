@@ -1,8 +1,0 @@
-hash: 18482f8f6643a2437d1167357694dd9434a31400d943d39f43b01ad19f911884
-updated: 2018-04-09T02:33:56.752897095+02:00
-imports:
-- name: github.com/martinusso/go-docs
-  version: 81905d575a58d3c6c690c32da2e430411c5de145
-  subpackages:
-  - cnpj
-testImports: []

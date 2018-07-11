@@ -1,5 +1,3 @@
 .env
 /vendor/
-
-/plugins/*.so
-/plugins/*/vendor
+plugin_bkp/

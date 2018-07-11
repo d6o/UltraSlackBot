@@ -1,3 +1,0 @@
-package: github.com/disiqueira/ultraslackbot/plugins/echo
-import:
-- package: github.com/CrowdSurge/banner

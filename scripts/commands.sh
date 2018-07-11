@@ -2,7 +2,7 @@
 
 set -e
 
-cd ./plugins/
+cd ./commands/
 
 find . -name \*.so -delete || true
 

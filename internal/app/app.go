@@ -2,17 +2,23 @@ package app
 
 import (
 	"context"
-	"github.com/spf13/cobra"
 	"log"
 	"os"
 
-	usbCtx "github.com/disiqueira/ultraslackbot/internal/context"
+	"github.com/spf13/cobra"
+
 	"github.com/disiqueira/ultraslackbot/pkg/slack"
-	"github.com/disiqueira/ultraslackbot/pkg/bot"
-	"github.com/disiqueira/ultraslackbot/internal/plugin"
+	usbCtx "github.com/disiqueira/ultraslackbot/internal/context"
+	"github.com/disiqueira/ultraslackbot/internal/bot"
 	"github.com/disiqueira/ultraslackbot/internal/conf"
-	"github.com/disiqueira/ultraslackbot/pkg/handlers/logger"
+	"github.com/disiqueira/ultraslackbot/internal/handlers/logger"
 	"github.com/disiqueira/ultraslackbot/internal/handlers/admin"
+	"github.com/disiqueira/ultraslackbot/internal/handlers/command"
+	"github.com/disiqueira/ultraslackbot/pkg/command/google"
+	"github.com/disiqueira/ultraslackbot/pkg/command/hello"
+	"github.com/disiqueira/ultraslackbot/pkg/command/9gag"
+	"github.com/disiqueira/ultraslackbot/pkg/command/choose"
+	"github.com/disiqueira/ultraslackbot/pkg/command/youtube"
 )
 
 type (
@@ -22,7 +28,9 @@ type (
 const (
 	successExitCode = 0
 	errorExitCode   = 1
-	slackTokenEnvVar   = "SLACKTOKEN"
+	slackTokenEnvVar  = "SLACKTOKEN"
+	googleKeyEnvVar = "GOOGLEKEY"
+	googleCXEnvVar  = "GOOGLECX"
 )
 
 func New() *App {
@@ -47,22 +55,37 @@ func (a *App) Run(cmd *cobra.Command, args []string) {
 		os.Exit(errorExitCode)
 	}
 
-	pluginReader := plugin.New()
-	loadedHandlers, err := pluginReader.Load(errLogger, specs)
-	if err != nil {
-		errLogger.Printf("Loading plugins error: %s", err.Error())
+	key, ok := specs.Get(googleKeyEnvVar)
+	if !ok {
+		errLogger.Printf("config missing %s", googleKeyEnvVar)
+		os.Exit(errorExitCode)
+	}
+
+	cx, ok := specs.Get(googleCXEnvVar)
+	if !ok {
+		errLogger.Printf("config missing %s", googleCXEnvVar)
+		os.Exit(errorExitCode)
 	}
 
 	slackClient := slack.New(slackToken.(string))
 	b := bot.New(slackClient)
-	b.SetHandlers(append(a.defaultHandlers(ctx, b), loadedHandlers...))
+
+	commandList := []*cobra.Command{
+		google.NewGoogleImageCommand(key.(string), cx.(string)),
+		google.NewGoogleSearchCommand(key.(string), cx.(string)),
+		hello.NewHelloCommand(),
+		ninegag.New9gagCommand(),
+		choose.NewChooseCommand(),
+		youtube.NewYoutubeCommand(key.(string)),
+	}
+
+	handlerList := []bot.Handler{
+		logger.New(outLogger),
+		admin.New(b),
+		command.New(commandList),
+	}
+
+	b.SetHandlers(handlerList)
 	b.Run(ctx)
 	os.Exit(successExitCode)
-}
-
-func (a *App) defaultHandlers(ctx context.Context, b *bot.Bot) []bot.Handler {
-	return []bot.Handler{
-		logger.New(usbCtx.OutLogger(ctx)),
-		admin.New(b),
-		}
 }
