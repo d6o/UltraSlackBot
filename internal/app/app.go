@@ -20,6 +20,7 @@ import (
 	"github.com/disiqueira/ultraslackbot/pkg/command/choose"
 	"github.com/disiqueira/ultraslackbot/pkg/command/youtube"
 	"github.com/disiqueira/ultraslackbot/pkg/command/wolfram"
+	"github.com/disiqueira/ultraslackbot/pkg/command/wikipedia"
 )
 
 type (
@@ -86,6 +87,7 @@ func (a *App) Run(cmd *cobra.Command, args []string) {
 		choose.NewChooseCommand(),
 		youtube.NewYoutubeCommand(key.(string)),
 		wolfram.NewWolframCommand(wolframKey.(string)),
+		wikipedia.NewWikipediaCommand(),
 	}
 
 	handlerList := []bot.Handler{
