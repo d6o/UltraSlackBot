@@ -19,6 +19,7 @@ import (
 	"github.com/disiqueira/ultraslackbot/pkg/command/9gag"
 	"github.com/disiqueira/ultraslackbot/pkg/command/choose"
 	"github.com/disiqueira/ultraslackbot/pkg/command/youtube"
+	"github.com/disiqueira/ultraslackbot/pkg/command/wolfram"
 )
 
 type (
@@ -31,6 +32,7 @@ const (
 	slackTokenEnvVar  = "SLACKTOKEN"
 	googleKeyEnvVar = "GOOGLEKEY"
 	googleCXEnvVar  = "GOOGLECX"
+	wolframKeyEnvName = "WOLFRAMKEY"
 )
 
 func New() *App {
@@ -67,6 +69,12 @@ func (a *App) Run(cmd *cobra.Command, args []string) {
 		os.Exit(errorExitCode)
 	}
 
+	wolframKey, ok := specs.Get(wolframKeyEnvName)
+	if !ok {
+		errLogger.Printf("config missing %s", wolframKeyEnvName)
+		os.Exit(errorExitCode)
+	}
+
 	slackClient := slack.New(slackToken.(string))
 	b := bot.New(slackClient)
 
@@ -77,6 +85,7 @@ func (a *App) Run(cmd *cobra.Command, args []string) {
 		ninegag.New9gagCommand(),
 		choose.NewChooseCommand(),
 		youtube.NewYoutubeCommand(key.(string)),
+		wolfram.NewWolframCommand(wolframKey.(string)),
 	}
 
 	handlerList := []bot.Handler{
