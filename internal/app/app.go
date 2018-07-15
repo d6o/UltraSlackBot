@@ -23,6 +23,7 @@ import (
 	"github.com/disiqueira/ultraslackbot/pkg/command/wikipedia"
 	"github.com/disiqueira/ultraslackbot/pkg/command/urban"
 	"github.com/disiqueira/ultraslackbot/pkg/command/cat"
+	"github.com/disiqueira/ultraslackbot/pkg/command/fortune"
 )
 
 type (
@@ -92,6 +93,7 @@ func (a *App) Run(cmd *cobra.Command, args []string) {
 		wikipedia.NewWikipediaCommand(),
 		urban.NewUrbanCommand(),
 		cat.NewCatCommand(),
+		fortune.NewFortuneCommand(),
 	}
 
 	handlerList := []bot.Handler{
