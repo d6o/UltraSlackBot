@@ -1,6 +1,8 @@
-hash: bd42e0517751f6cc4c1eb479c73f11c75c7a146eab9e4d39617ce2b15c03ef18
-updated: 2018-07-11T22:58:56.939709Z
+hash: 9cea686e1716a7dd8006f1d9e37588d60254b7545bb14e3398cc87263e0c16ae
+updated: 2018-07-16T00:44:43.881296495+02:00
 imports:
+- name: github.com/andybalholm/cascadia
+  version: 901648c87902174f774fac311d7f176f8647bdaa
 - name: github.com/bitly/go-simplejson
   version: 0c965951289cce37dec52ad1f34200fefc816777
 - name: github.com/BurntSushi/toml
@@ -12,7 +14,7 @@ imports:
 - name: github.com/gorilla/websocket
   version: eb925808374e5ca90c83401a40d711dc08c0c0f6
 - name: github.com/hashicorp/hcl
-  version: 8f6b1344a92ff8877cf24a5de9177bf7d0a2a187
+  version: 392dba7d905ed5d04a5794ba89f558b27e2ba1ca
   subpackages:
   - hcl/ast
   - hcl/parser
@@ -42,6 +44,8 @@ imports:
   - source/file
 - name: github.com/nlopes/slack
   version: 8ab4d0b364ef1e9af5d102531da20d5ec902b6c4
+- name: github.com/PuerkitoBio/goquery
+  version: dc2ec5c7ca4d9aae063b79b9f581dd3ea6afd2b2
 - name: github.com/spf13/cobra
   version: ef82de70bb3f60c65fb8eebacbb2d122ef517385
 - name: github.com/spf13/pflag
@@ -51,12 +55,14 @@ imports:
   subpackages:
   - context
   - context/ctxhttp
+  - html
+  - html/atom
 - name: golang.org/x/sys
-  version: 9aade4d3a3b7e6d876cd3823ad20ec45fc035402
+  version: 07c182904dbd53199946ba614a412c61d3c548f5
   subpackages:
   - unix
 - name: google.golang.org/api
-  version: 4d8a15a217e46f47fb724569d74702bec99852d3
+  version: b1ecfb35ad07443b92ba0cdac16f21787b978d93
   subpackages:
   - gensupport
   - googleapi
@@ -64,5 +70,5 @@ imports:
   - googleapi/transport
   - youtube/v3
 - name: gopkg.in/yaml.v2
-  version: eb3733d160e74a9c7e442f435eb3bea458e1d19f
+  version: cd8b52f8269e0feb286dfeef29f8fe4d5b397e0b
 testImports: []

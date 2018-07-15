@@ -12,3 +12,5 @@ import:
   subpackages:
   - youtube/v3
   - googleapi/transport
+- package: github.com/PuerkitoBio/goquery
+  version: ^1.4.1
