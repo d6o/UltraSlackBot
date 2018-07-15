@@ -27,6 +27,7 @@ import (
 	"github.com/disiqueira/ultraslackbot/pkg/command/howlongtobeat"
 	"github.com/disiqueira/ultraslackbot/pkg/command/lenny"
 	"github.com/disiqueira/ultraslackbot/pkg/command/shrug"
+	"github.com/disiqueira/ultraslackbot/pkg/command/lastfm"
 )
 
 type (
@@ -40,6 +41,7 @@ const (
 	googleKeyEnvVar = "GOOGLEKEY"
 	googleCXEnvVar  = "GOOGLECX"
 	wolframKeyEnvName = "WOLFRAMKEY"
+	lastFMKeyEnvName = "LASTFMKEY"
 )
 
 func New() *App {
@@ -82,6 +84,12 @@ func (a *App) Run(cmd *cobra.Command, args []string) {
 		os.Exit(errorExitCode)
 	}
 
+	lastfmKey, ok := specs.Get(lastFMKeyEnvName)
+	if !ok {
+		errLogger.Printf("config missing %s", lastFMKeyEnvName)
+		os.Exit(errorExitCode)
+	}
+
 	slackClient := slack.New(slackToken.(string))
 	b := bot.New(slackClient)
 
@@ -100,6 +108,7 @@ func (a *App) Run(cmd *cobra.Command, args []string) {
 		howlongtobeat.NewHLTBCommand(),
 		lenny.NewLennyCommand(),
 		shrug.NewShrugCommand(),
+		lastfm.NewLastFMCommand(lastfmKey.(string)),
 	}
 
 	handlerList := []bot.Handler{
