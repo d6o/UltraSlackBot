@@ -25,6 +25,7 @@ import (
 	"github.com/disiqueira/ultraslackbot/pkg/command/cat"
 	"github.com/disiqueira/ultraslackbot/pkg/command/fortune"
 	"github.com/disiqueira/ultraslackbot/pkg/command/howlongtobeat"
+	"github.com/disiqueira/ultraslackbot/pkg/command/lenny"
 )
 
 type (
@@ -96,6 +97,7 @@ func (a *App) Run(cmd *cobra.Command, args []string) {
 		cat.NewCatCommand(),
 		fortune.NewFortuneCommand(),
 		howlongtobeat.NewHLTBCommand(),
+		lenny.NewLennyCommand(),
 	}
 
 	handlerList := []bot.Handler{
