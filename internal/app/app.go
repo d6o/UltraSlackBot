@@ -31,6 +31,7 @@ import (
 	"github.com/disiqueira/ultraslackbot/pkg/command/random"
 	"github.com/disiqueira/ultraslackbot/pkg/command/chucknorris"
 	"github.com/disiqueira/ultraslackbot/pkg/command/echo"
+	"github.com/disiqueira/ultraslackbot/pkg/command/emoji"
 )
 
 type (
@@ -115,6 +116,7 @@ func (a *App) Run(cmd *cobra.Command, args []string) {
 		random.NewRandomCommand(),
 		chucknorris.NewChuckNorrisFactCommand(),
 		echo.NewEchoCommand(),
+		emoji.NewEmojiCommand(),
 	}
 
 	handlerList := []bot.Handler{

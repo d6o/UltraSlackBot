@@ -16,3 +16,5 @@ import:
   version: ^1.4.1
 - package: github.com/Pallinder/go-randomdata
 - package: github.com/CrowdSurge/banner
+- package: github.com/hackebrot/turtle
+  version: ^0.1.0

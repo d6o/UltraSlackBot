@@ -1,5 +1,5 @@
-hash: 104ea731c2551a362d10b1daafee4c3e8f3ef5bdfe99a36b256d342bf995eb59
-updated: 2018-07-16T10:23:24.725556904+02:00
+hash: 46ba1f8f91be0ff25ed91dbb56170e68b2f5d5490b308670dabe56ebacb0a9ca
+updated: 2018-07-16T11:03:10.928343064+02:00
 imports:
 - name: github.com/andybalholm/cascadia
   version: 901648c87902174f774fac311d7f176f8647bdaa
@@ -9,12 +9,16 @@ imports:
   version: a368813c5e648fee92e5f6c30e3944ff9d5e8895
 - name: github.com/CrowdSurge/banner
   version: 8c0e79dc5ff70fb2919f0d662f44fd72ccdf9be2
+  subpackages:
+  - fonts
 - name: github.com/fsnotify/fsnotify
   version: 4da3e2cfbabc9f751898f250b49f2439785783a1
 - name: github.com/ghodss/yaml
   version: e9ed3c6dfb39bb1a32197cb10d527906fe4da4b6
 - name: github.com/gorilla/websocket
   version: eb925808374e5ca90c83401a40d711dc08c0c0f6
+- name: github.com/hackebrot/turtle
+  version: 6bbdbf8123bdafb8c3db0c0fc5db11bf3d2fb500
 - name: github.com/hashicorp/hcl
   version: 392dba7d905ed5d04a5794ba89f558b27e2ba1ca
   subpackages:
