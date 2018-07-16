@@ -1,5 +1,5 @@
-hash: 700674f3e5993cb54f1c16e7ee07b23e354596420ee63f78efdf45fe3caaf731
-updated: 2018-07-16T01:48:58.036315563+02:00
+hash: 104ea731c2551a362d10b1daafee4c3e8f3ef5bdfe99a36b256d342bf995eb59
+updated: 2018-07-16T10:23:24.725556904+02:00
 imports:
 - name: github.com/andybalholm/cascadia
   version: 901648c87902174f774fac311d7f176f8647bdaa
@@ -7,6 +7,8 @@ imports:
   version: 0c965951289cce37dec52ad1f34200fefc816777
 - name: github.com/BurntSushi/toml
   version: a368813c5e648fee92e5f6c30e3944ff9d5e8895
+- name: github.com/CrowdSurge/banner
+  version: 8c0e79dc5ff70fb2919f0d662f44fd72ccdf9be2
 - name: github.com/fsnotify/fsnotify
   version: 4da3e2cfbabc9f751898f250b49f2439785783a1
 - name: github.com/ghodss/yaml
