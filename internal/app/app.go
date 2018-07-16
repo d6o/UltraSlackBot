@@ -29,6 +29,7 @@ import (
 	"github.com/disiqueira/ultraslackbot/pkg/command/shrug"
 	"github.com/disiqueira/ultraslackbot/pkg/command/lastfm"
 	"github.com/disiqueira/ultraslackbot/pkg/command/random"
+	"github.com/disiqueira/ultraslackbot/pkg/command/chucknorris"
 )
 
 type (
@@ -111,6 +112,7 @@ func (a *App) Run(cmd *cobra.Command, args []string) {
 		shrug.NewShrugCommand(),
 		lastfm.NewLastFMCommand(lastfmKey.(string)),
 		random.NewRandomCommand(),
+		chucknorris.NewChuckNorrisFactCommand(),
 	}
 
 	handlerList := []bot.Handler{
