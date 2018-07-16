@@ -1,5 +1,5 @@
-hash: 9cea686e1716a7dd8006f1d9e37588d60254b7545bb14e3398cc87263e0c16ae
-updated: 2018-07-16T00:44:43.881296495+02:00
+hash: 700674f3e5993cb54f1c16e7ee07b23e354596420ee63f78efdf45fe3caaf731
+updated: 2018-07-16T01:48:58.036315563+02:00
 imports:
 - name: github.com/andybalholm/cascadia
   version: 901648c87902174f774fac311d7f176f8647bdaa
@@ -44,6 +44,8 @@ imports:
   - source/file
 - name: github.com/nlopes/slack
   version: 8ab4d0b364ef1e9af5d102531da20d5ec902b6c4
+- name: github.com/Pallinder/go-randomdata
+  version: 15df0648130a623e418886f81b2aaecd0a00547b
 - name: github.com/PuerkitoBio/goquery
   version: dc2ec5c7ca4d9aae063b79b9f581dd3ea6afd2b2
 - name: github.com/spf13/cobra
