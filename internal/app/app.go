@@ -34,6 +34,7 @@ import (
 	"github.com/disiqueira/ultraslackbot/pkg/command/emoji"
 	"github.com/disiqueira/ultraslackbot/pkg/command/isup"
 	"github.com/disiqueira/ultraslackbot/pkg/command/aftership"
+	"github.com/disiqueira/ultraslackbot/pkg/command/uuid"
 )
 
 type (
@@ -128,6 +129,7 @@ func (a *App) Run(cmd *cobra.Command, args []string) {
 		emoji.NewEmojiCommand(),
 		isup.NewIsUpCommand(),
 		afterShip.NewAfterShipCommand(afterShipKey.(string)),
+		uuid.NewUUIDCommand(),
 	}
 
 	handlerList := []bot.Handler{

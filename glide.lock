@@ -1,8 +1,10 @@
-hash: ed176686316e56dc6f02cabc64fe8d6ad4a72741efd435a4f0cabea4d26cf35f
-updated: 2018-07-18T10:57:34.373549123+02:00
+hash: 6c404f2641d236917448a20585bf7bc9e09191c8bc0720494ce80052f9c77e81
+updated: 2018-07-18T10:59:19.513280423+02:00
 imports:
 - name: github.com/andybalholm/cascadia
   version: 901648c87902174f774fac311d7f176f8647bdaa
+- name: github.com/beevik/guid
+  version: d0ea8faecee03ccdfb5ab8322d5d9037bb7af438
 - name: github.com/bitly/go-simplejson
   version: 0c965951289cce37dec52ad1f34200fefc816777
 - name: github.com/BurntSushi/toml
