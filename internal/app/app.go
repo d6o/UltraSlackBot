@@ -36,6 +36,7 @@ import (
 	"github.com/disiqueira/ultraslackbot/pkg/command/aftership"
 	"github.com/disiqueira/ultraslackbot/pkg/command/uuid"
 	"github.com/disiqueira/ultraslackbot/pkg/command/docs"
+	"github.com/disiqueira/ultraslackbot/pkg/command/clarifai"
 )
 
 type (
@@ -51,6 +52,8 @@ const (
 	wolframKeyEnvName = "WOLFRAMKEY"
 	lastFMKeyEnvName = "LASTFMKEY"
 	afterShipKeyEnvName = "AFTERSHIPKEY"
+	clarifaiKeyEnvName = "CLARIFAIKEY"
+	clarifaiModelEnvName = "CLARIFAIMODEL"
 )
 
 func New() *App {
@@ -105,6 +108,18 @@ func (a *App) Run(cmd *cobra.Command, args []string) {
 		os.Exit(errorExitCode)
 	}
 
+	clarifaiKey, ok := specs.Get(clarifaiKeyEnvName)
+	if !ok {
+		errLogger.Printf("config missing %s", clarifaiKeyEnvName)
+		os.Exit(errorExitCode)
+	}
+
+	clarifaiModel, ok := specs.Get(clarifaiModelEnvName)
+	if !ok {
+		errLogger.Printf("config missing %s", clarifaiModelEnvName)
+		os.Exit(errorExitCode)
+	}
+
 	slackClient := slack.New(slackToken.(string))
 	b := bot.New(slackClient)
 
@@ -132,6 +147,7 @@ func (a *App) Run(cmd *cobra.Command, args []string) {
 		afterShip.NewAfterShipCommand(afterShipKey.(string)),
 		uuid.NewUUIDCommand(),
 		docs.NewDocsCommand(),
+		clarifai.NewClarifaiCommand(clarifaiKey.(string), clarifaiModel.(string)),
 	}
 
 	handlerList := []bot.Handler{
