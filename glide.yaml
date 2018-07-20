@@ -18,3 +18,7 @@ import:
 - package: github.com/CrowdSurge/banner
 - package: github.com/hackebrot/turtle
   version: ^0.1.0
+- package: github.com/jessfraz/ship
+  version: ^0.0.5
+  subpackages:
+  - aftership

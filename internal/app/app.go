@@ -33,6 +33,7 @@ import (
 	"github.com/disiqueira/ultraslackbot/pkg/command/echo"
 	"github.com/disiqueira/ultraslackbot/pkg/command/emoji"
 	"github.com/disiqueira/ultraslackbot/pkg/command/isup"
+	"github.com/disiqueira/ultraslackbot/pkg/command/aftership"
 )
 
 type (
@@ -47,6 +48,7 @@ const (
 	googleCXEnvVar  = "GOOGLECX"
 	wolframKeyEnvName = "WOLFRAMKEY"
 	lastFMKeyEnvName = "LASTFMKEY"
+	afterShipKeyEnvName = "AFTERSHIPKEY"
 )
 
 func New() *App {
@@ -95,6 +97,12 @@ func (a *App) Run(cmd *cobra.Command, args []string) {
 		os.Exit(errorExitCode)
 	}
 
+	afterShipKey, ok := specs.Get(afterShipKeyEnvName)
+	if !ok {
+		errLogger.Printf("config missing %s", afterShipKeyEnvName)
+		os.Exit(errorExitCode)
+	}
+
 	slackClient := slack.New(slackToken.(string))
 	b := bot.New(slackClient)
 
@@ -119,6 +127,7 @@ func (a *App) Run(cmd *cobra.Command, args []string) {
 		echo.NewEchoCommand(),
 		emoji.NewEmojiCommand(),
 		isup.NewIsUpCommand(),
+		afterShip.NewAfterShipCommand(afterShipKey.(string)),
 	}
 
 	handlerList := []bot.Handler{

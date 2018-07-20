@@ -1,5 +1,5 @@
-hash: 46ba1f8f91be0ff25ed91dbb56170e68b2f5d5490b308670dabe56ebacb0a9ca
-updated: 2018-07-16T11:03:10.928343064+02:00
+hash: ed176686316e56dc6f02cabc64fe8d6ad4a72741efd435a4f0cabea4d26cf35f
+updated: 2018-07-18T10:57:34.373549123+02:00
 imports:
 - name: github.com/andybalholm/cascadia
   version: 901648c87902174f774fac311d7f176f8647bdaa
@@ -20,7 +20,7 @@ imports:
 - name: github.com/hackebrot/turtle
   version: 6bbdbf8123bdafb8c3db0c0fc5db11bf3d2fb500
 - name: github.com/hashicorp/hcl
-  version: 392dba7d905ed5d04a5794ba89f558b27e2ba1ca
+  version: 8f6b1344a92ff8877cf24a5de9177bf7d0a2a187
   subpackages:
   - hcl/ast
   - hcl/parser
@@ -34,6 +34,10 @@ imports:
   version: 9316a62528ac99aaecb4e47eadd6dc8aa6533d58
 - name: github.com/inconshreveable/mousetrap
   version: 76626ae9c91c4f2a10f34cad8ce83ea42c93bb75
+- name: github.com/jessfraz/ship
+  version: c371a49613899b456490b3bcd718944798dbd156
+  subpackages:
+  - aftership
 - name: github.com/micro/go-config
   version: 36fd59604ea6c0a01007f71a77ac287ca2e044bc
   subpackages:
@@ -66,11 +70,11 @@ imports:
   - html
   - html/atom
 - name: golang.org/x/sys
-  version: 07c182904dbd53199946ba614a412c61d3c548f5
+  version: 9aade4d3a3b7e6d876cd3823ad20ec45fc035402
   subpackages:
   - unix
 - name: google.golang.org/api
-  version: b1ecfb35ad07443b92ba0cdac16f21787b978d93
+  version: e0f3bfad25321f7b0777b3ab35a0503dcb221744
   subpackages:
   - gensupport
   - googleapi
@@ -78,5 +82,5 @@ imports:
   - googleapi/transport
   - youtube/v3
 - name: gopkg.in/yaml.v2
-  version: cd8b52f8269e0feb286dfeef29f8fe4d5b397e0b
+  version: eb3733d160e74a9c7e442f435eb3bea458e1d19f
 testImports: []
