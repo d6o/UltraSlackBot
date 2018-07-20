@@ -1,5 +1,5 @@
-hash: 6c404f2641d236917448a20585bf7bc9e09191c8bc0720494ce80052f9c77e81
-updated: 2018-07-18T10:59:19.513280423+02:00
+hash: a01627eb9290f1a66a4403ab9db2c9f9f6d550b2c3b94be6acd828e33bef7406
+updated: 2018-07-25T16:22:32.073352558+02:00
 imports:
 - name: github.com/andybalholm/cascadia
   version: 901648c87902174f774fac311d7f176f8647bdaa
@@ -58,6 +58,8 @@ imports:
   version: 8ab4d0b364ef1e9af5d102531da20d5ec902b6c4
 - name: github.com/Pallinder/go-randomdata
   version: 15df0648130a623e418886f81b2aaecd0a00547b
+- name: github.com/parnurzeal/gorequest
+  version: a578a48e8d6ca8b01a3b18314c43c6716bb5f5a3
 - name: github.com/PuerkitoBio/goquery
   version: dc2ec5c7ca4d9aae063b79b9f581dd3ea6afd2b2
 - name: github.com/spf13/cobra
@@ -85,4 +87,6 @@ imports:
   - youtube/v3
 - name: gopkg.in/yaml.v2
   version: eb3733d160e74a9c7e442f435eb3bea458e1d19f
+- name: mvdan.cc/xurls
+  version: d315b61cf6727664f310fa87b3197e9faf2a8513
 testImports: []

@@ -12,6 +12,8 @@ services:
         - USB_WOLFRAMKEY=${USB_WOLFRAMKEY}
         - USB_LASTFMKEY=${USB_LASTFMKEY}
         - USB_AFTERSHIPKEY=${USB_AFTERSHIPKEY}
+        - USB_CLARIFAIKEY=${USB_CLARIFAIKEY}
+        - USB_CLARIFAIMODEL=${USB_CLARIFAIMODEL}
     volumes:
       - .:/go/src/github.com/disiqueira/ultraslackbot
     environment:
@@ -21,3 +23,5 @@ services:
       USB_WOLFRAMKEY: ${USB_WOLFRAMKEY}
       USB_LASTFMKEY: ${USB_LASTFMKEY}
       USB_AFTERSHIPKEY: ${USB_AFTERSHIPKEY}
+      USB_CLARIFAIKEY: ${USB_CLARIFAIKEY}
+      USB_CLARIFAIMODEL: ${USB_CLARIFAIMODEL}

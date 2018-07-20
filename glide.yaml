@@ -23,3 +23,7 @@ import:
   subpackages:
   - aftership
 - package: github.com/beevik/guid
+- package: github.com/parnurzeal/gorequest
+  version: ^0.2.15
+- package: mvdan.cc/xurls
+  version: ^1.1.0

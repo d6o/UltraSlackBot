@@ -52,6 +52,8 @@ const (
 	wolframKeyEnvName = "WOLFRAMKEY"
 	lastFMKeyEnvName = "LASTFMKEY"
 	afterShipKeyEnvName = "AFTERSHIPKEY"
+	clarifaiKeyEnvName = "CLARIFAIKEY"
+	clarifaiModelEnvName = "CLARIFAIMODEL"
 )
 
 func New() *App {

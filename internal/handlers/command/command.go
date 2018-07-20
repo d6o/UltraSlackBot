@@ -61,7 +61,7 @@ func (c *Command) Execute(ctx context.Context, event slack.Event, botUser bot.Us
 func (c *Command) handleMessageEvent(ctx context.Context, messageEvent slack.Message, botUser bot.UserInfo) ([]slack.Message, error) {
 	usbctx.OutLogger(ctx).Printf("%+v", messageEvent)
 
-	msg := strings.TrimSpace(strings.ToLower(messageEvent.Text()))
+	msg := strings.TrimSpace(messageEvent.Text())
 	if len(msg) == 0 || string(msg[0]) != suffix {
 		return nil, nil
 	}
