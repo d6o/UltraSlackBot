@@ -36,6 +36,7 @@ import (
 	"github.com/disiqueira/ultraslackbot/pkg/command/aftership"
 	"github.com/disiqueira/ultraslackbot/pkg/command/uuid"
 	"github.com/disiqueira/ultraslackbot/pkg/command/docs"
+	"github.com/disiqueira/ultraslackbot/pkg/command/bible"
 )
 
 type (
@@ -132,6 +133,7 @@ func (a *App) Run(cmd *cobra.Command, args []string) {
 		afterShip.NewAfterShipCommand(afterShipKey.(string)),
 		uuid.NewUUIDCommand(),
 		docs.NewDocsCommand(),
+		bible.NewBibleCommand(),
 	}
 
 	handlerList := []bot.Handler{
