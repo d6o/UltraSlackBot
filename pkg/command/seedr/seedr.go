@@ -1,51 +1,35 @@
 package seedr
 
 import (
-			"github.com/spf13/cobra"
-				"github.com/disiqueira/ultraslackbot/pkg/seedr"
+	"github.com/disiqueira/ultraslackbot/pkg/seedr"
+	"github.com/spf13/cobra"
 )
 
 const (
-	example = `
-		# Ask a question
-		!seedr Who is the president of Brazil?
-
-		# Ask another question
-		!seedr What is the distance between the Earth and the Moon?
-
-		# Solve math problems
-		!calc 2+2`
-)
-
-type (
-	seedrManager struct {
-		client *seedr.Seedr
-	}
+	example = `# TODO`
 )
 
 func NewSeedrCommand(username, password string) *cobra.Command {
 	s := seedr.New(username, password)
+	m := newSeedrManager(s)
 
 	c := &cobra.Command{
 		Use:     "seedr",
-		Short:   "Ask a question to Seedr|Alpha",
+		Short:   "Download and watch movies",
 		Example: example,
 		Args:    cobra.MinimumNArgs(1),
 		Run: func(cmd *cobra.Command, args []string) {
-			f, err := s.Folders()
+			f, err := m.Folders()
 			if err != nil {
-				r = err.Error()
+				f = err.Error()
 			}
-			cmd.OutOrStdout().Write([]byte(r))
+			cmd.OutOrStdout().Write([]byte(f))
 		},
-		Aliases: []string{"wa", "calc", "ask"},
 	}
+
+	c.AddCommand(NewSeedrFoldersCommand(m))
+	c.AddCommand(NewSeedrFolderCommand(m))
+	c.AddCommand(NewSeedrWatchCommand(m))
 
 	return c
-}
-
-func newSeedrManager() *seedrManager {
-	return &seedrManager{
-		client:
-	}
 }

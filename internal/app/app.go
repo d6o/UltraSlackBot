@@ -37,6 +37,7 @@ import (
 	"github.com/disiqueira/ultraslackbot/pkg/command/wolfram"
 	"github.com/disiqueira/ultraslackbot/pkg/command/youtube"
 	"github.com/disiqueira/ultraslackbot/pkg/slack"
+	"github.com/disiqueira/ultraslackbot/pkg/command/seedr"
 )
 
 type (
@@ -52,8 +53,8 @@ const (
 	wolframKeyEnvName    = "WOLFRAMKEY"
 	lastFMKeyEnvName     = "LASTFMKEY"
 	afterShipKeyEnvName  = "AFTERSHIPKEY"
-	clarifaiKeyEnvName   = "CLARIFAIKEY"
-	clarifaiModelEnvName = "CLARIFAIMODEL"
+	seedrUsernameEnvName   = "SEEDRUSERNAME"
+	seedrPasswordEnvName   = "SEEDRPASSWORD"
 )
 
 func New() *App {
@@ -108,6 +109,18 @@ func (a *App) Run(cmd *cobra.Command, args []string) {
 		os.Exit(errorExitCode)
 	}
 
+	seedrUsername, ok := specs.Get(seedrUsernameEnvName)
+	if !ok {
+		errLogger.Printf("config missing %s", seedrUsernameEnvName)
+		os.Exit(errorExitCode)
+	}
+
+	seedrPassword, ok := specs.Get(seedrPasswordEnvName)
+	if !ok {
+		errLogger.Printf("config missing %s", seedrPasswordEnvName)
+		os.Exit(errorExitCode)
+	}
+
 	slackClient := slack.New(slackToken.(string))
 	b := bot.New(slackClient)
 
@@ -136,6 +149,7 @@ func (a *App) Run(cmd *cobra.Command, args []string) {
 		uuid.NewUUIDCommand(),
 		docs.NewDocsCommand(),
 		bible.NewBibleCommand(),
+		seedr.NewSeedrCommand(seedrUsername.(string), seedrPassword.(string)),
 	}
 
 	handlerList := []bot.Handler{
