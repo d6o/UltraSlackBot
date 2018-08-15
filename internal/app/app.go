@@ -7,52 +7,52 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/disiqueira/ultraslackbot/pkg/slack"
-	usbCtx "github.com/disiqueira/ultraslackbot/internal/context"
 	"github.com/disiqueira/ultraslackbot/internal/bot"
 	"github.com/disiqueira/ultraslackbot/internal/conf"
-	"github.com/disiqueira/ultraslackbot/internal/handlers/logger"
+	usbCtx "github.com/disiqueira/ultraslackbot/internal/context"
 	"github.com/disiqueira/ultraslackbot/internal/handlers/admin"
 	"github.com/disiqueira/ultraslackbot/internal/handlers/command"
-	"github.com/disiqueira/ultraslackbot/pkg/command/google"
-	"github.com/disiqueira/ultraslackbot/pkg/command/hello"
+	"github.com/disiqueira/ultraslackbot/internal/handlers/logger"
 	"github.com/disiqueira/ultraslackbot/pkg/command/9gag"
-	"github.com/disiqueira/ultraslackbot/pkg/command/choose"
-	"github.com/disiqueira/ultraslackbot/pkg/command/youtube"
-	"github.com/disiqueira/ultraslackbot/pkg/command/wolfram"
-	"github.com/disiqueira/ultraslackbot/pkg/command/wikipedia"
-	"github.com/disiqueira/ultraslackbot/pkg/command/urban"
+	"github.com/disiqueira/ultraslackbot/pkg/command/aftership"
+	"github.com/disiqueira/ultraslackbot/pkg/command/bible"
 	"github.com/disiqueira/ultraslackbot/pkg/command/cat"
-	"github.com/disiqueira/ultraslackbot/pkg/command/fortune"
-	"github.com/disiqueira/ultraslackbot/pkg/command/howlongtobeat"
-	"github.com/disiqueira/ultraslackbot/pkg/command/lenny"
-	"github.com/disiqueira/ultraslackbot/pkg/command/shrug"
-	"github.com/disiqueira/ultraslackbot/pkg/command/lastfm"
-	"github.com/disiqueira/ultraslackbot/pkg/command/random"
+	"github.com/disiqueira/ultraslackbot/pkg/command/choose"
 	"github.com/disiqueira/ultraslackbot/pkg/command/chucknorris"
+	"github.com/disiqueira/ultraslackbot/pkg/command/docs"
 	"github.com/disiqueira/ultraslackbot/pkg/command/echo"
 	"github.com/disiqueira/ultraslackbot/pkg/command/emoji"
+	"github.com/disiqueira/ultraslackbot/pkg/command/fortune"
+	"github.com/disiqueira/ultraslackbot/pkg/command/google"
+	"github.com/disiqueira/ultraslackbot/pkg/command/hello"
+	"github.com/disiqueira/ultraslackbot/pkg/command/howlongtobeat"
 	"github.com/disiqueira/ultraslackbot/pkg/command/isup"
-	"github.com/disiqueira/ultraslackbot/pkg/command/aftership"
+	"github.com/disiqueira/ultraslackbot/pkg/command/lastfm"
+	"github.com/disiqueira/ultraslackbot/pkg/command/lenny"
+	"github.com/disiqueira/ultraslackbot/pkg/command/random"
+	"github.com/disiqueira/ultraslackbot/pkg/command/shrug"
+	"github.com/disiqueira/ultraslackbot/pkg/command/urban"
 	"github.com/disiqueira/ultraslackbot/pkg/command/uuid"
-	"github.com/disiqueira/ultraslackbot/pkg/command/docs"
-	"github.com/disiqueira/ultraslackbot/pkg/command/bible"
+	"github.com/disiqueira/ultraslackbot/pkg/command/wikipedia"
+	"github.com/disiqueira/ultraslackbot/pkg/command/wolfram"
+	"github.com/disiqueira/ultraslackbot/pkg/command/youtube"
+	"github.com/disiqueira/ultraslackbot/pkg/slack"
 )
 
 type (
-	App struct {}
+	App struct{}
 )
 
 const (
-	successExitCode = 0
-	errorExitCode   = 1
-	slackTokenEnvVar  = "SLACKTOKEN"
-	googleKeyEnvVar = "GOOGLEKEY"
-	googleCXEnvVar  = "GOOGLECX"
-	wolframKeyEnvName = "WOLFRAMKEY"
-	lastFMKeyEnvName = "LASTFMKEY"
-	afterShipKeyEnvName = "AFTERSHIPKEY"
-	clarifaiKeyEnvName = "CLARIFAIKEY"
+	successExitCode      = 0
+	errorExitCode        = 1
+	slackTokenEnvVar     = "SLACKTOKEN"
+	googleKeyEnvVar      = "GOOGLEKEY"
+	googleCXEnvVar       = "GOOGLECX"
+	wolframKeyEnvName    = "WOLFRAMKEY"
+	lastFMKeyEnvName     = "LASTFMKEY"
+	afterShipKeyEnvName  = "AFTERSHIPKEY"
+	clarifaiKeyEnvName   = "CLARIFAIKEY"
 	clarifaiModelEnvName = "CLARIFAIMODEL"
 )
 

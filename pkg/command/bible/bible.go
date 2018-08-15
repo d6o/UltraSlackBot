@@ -1,29 +1,29 @@
 package bible
 
 import (
-	"github.com/spf13/cobra"
-	"fmt"
-	"strings"
-	"net/url"
-	"github.com/disiqueira/ultraslackbot/pkg/command"
 	"errors"
+	"fmt"
+	"github.com/disiqueira/ultraslackbot/pkg/command"
+	"github.com/spf13/cobra"
+	"net/url"
+	"strings"
 )
 
 const (
 	urlBible = "http://labs.bible.org/api/?passage=%s&type=json&formatting=plain"
 
-	formatBible = "%s %d:%d - %s"
-	example = `
+	formatBible = "%s %s:%s - %s"
+	example     = `
 		# Get John 3:16 bible verse
 		!bible John 3:16`
 )
 
 type (
 	bible struct {
-		total int
-		skip  int
+		total  int
+		skip   int
 		random bool
-		votd bool
+		votd   bool
 	}
 
 	bibleResponse []struct {
@@ -41,7 +41,6 @@ func NewBibleCommand() *cobra.Command {
 		Use:     "bible",
 		Short:   "Ask a question to Bible",
 		Example: example,
-		Args:    cobra.MinimumNArgs(1),
 		Run: func(cmd *cobra.Command, args []string) {
 			r, err := b.search(strings.Join(args, " "))
 			if err != nil {
@@ -52,10 +51,10 @@ func NewBibleCommand() *cobra.Command {
 		},
 	}
 
-	c.Flags().IntVarP(&b.total, "total", "t",1, "How many verses will be returned")
-	c.Flags().IntVarP(&b.skip, "skip","s", 0, "How many verses should be skipped")
-	c.Flags().BoolVarP(&b.random, "random", "r",false, "Return an random verse")
-	c.Flags().BoolVarP(&b.votd, "verse-of-the-day","v", false, "Return the Bible.org Verse of the Day (VOTD)")
+	c.Flags().IntVarP(&b.total, "total", "t", 1, "How many verses will be returned")
+	c.Flags().IntVarP(&b.skip, "skip", "s", 0, "How many verses should be skipped")
+	c.Flags().BoolVarP(&b.random, "random", "r", false, "Return an random verse")
+	c.Flags().BoolVarP(&b.votd, "verse-of-the-day", "v", false, "Return the Bible.org Verse of the Day (VOTD)")
 
 	return c
 }
@@ -65,7 +64,7 @@ func newBible() *bible {
 }
 
 func (b *bible) search(q string) (string, error) {
-	if err := b.validate(); err != nil {
+	if err := b.validate(q); err != nil {
 		return "", err
 	}
 
@@ -102,9 +101,13 @@ func (b *bible) search(q string) (string, error) {
 	return strings.Join(msgList, " "), nil
 }
 
-func (b *bible) validate() error {
+func (b *bible) validate(q string) error {
 	if b.votd && b.random {
 		return errors.New("--random and --votd are mutually exclusive")
+	}
+
+	if !b.votd && !b.random && q == "" {
+		return errors.New("at least one parameter is necessary")
 	}
 
 	return nil
