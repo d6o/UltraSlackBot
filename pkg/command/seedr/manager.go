@@ -24,9 +24,13 @@ func newSeedrManager(client *seedr.Seedr) *seedrManager {
 
 func (s *seedrManager) Folders() (string, error) {
 	folders, err := s.client.Folders()
+	fmt.Printf("%+v\n", folders)
+	fmt.Printf("%+v\n", err)
 	if err != nil {
 		return "", err
 	}
+
+	fmt.Printf("%+v\n", folders.Folders)
 
 	var msgList []string
 	for _, folder := range folders.Folders {

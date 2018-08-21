@@ -30,14 +30,15 @@ import (
 	"github.com/disiqueira/ultraslackbot/pkg/command/lastfm"
 	"github.com/disiqueira/ultraslackbot/pkg/command/lenny"
 	"github.com/disiqueira/ultraslackbot/pkg/command/random"
+	"github.com/disiqueira/ultraslackbot/pkg/command/seedr"
 	"github.com/disiqueira/ultraslackbot/pkg/command/shrug"
 	"github.com/disiqueira/ultraslackbot/pkg/command/urban"
 	"github.com/disiqueira/ultraslackbot/pkg/command/uuid"
+	"github.com/disiqueira/ultraslackbot/pkg/command/watch"
 	"github.com/disiqueira/ultraslackbot/pkg/command/wikipedia"
 	"github.com/disiqueira/ultraslackbot/pkg/command/wolfram"
 	"github.com/disiqueira/ultraslackbot/pkg/command/youtube"
 	"github.com/disiqueira/ultraslackbot/pkg/slack"
-	"github.com/disiqueira/ultraslackbot/pkg/command/seedr"
 )
 
 type (
@@ -53,8 +54,8 @@ const (
 	wolframKeyEnvName    = "WOLFRAMKEY"
 	lastFMKeyEnvName     = "LASTFMKEY"
 	afterShipKeyEnvName  = "AFTERSHIPKEY"
-	seedrUsernameEnvName   = "SEEDRUSERNAME"
-	seedrPasswordEnvName   = "SEEDRPASSWORD"
+	seedrUsernameEnvName = "SEEDRUSERNAME"
+	seedrPasswordEnvName = "SEEDRPASSWORD"
 )
 
 func New() *App {
@@ -150,6 +151,7 @@ func (a *App) Run(cmd *cobra.Command, args []string) {
 		docs.NewDocsCommand(),
 		bible.NewBibleCommand(),
 		seedr.NewSeedrCommand(seedrUsername.(string), seedrPassword.(string)),
+		watch.NewWatchCommand(seedrUsername.(string), seedrPassword.(string)),
 	}
 
 	handlerList := []bot.Handler{

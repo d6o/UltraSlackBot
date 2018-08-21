@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"net/http"
 	"net/url"
+	"strings"
 )
 
 const (
@@ -20,10 +21,6 @@ type (
 	Seedr struct {
 		username, password string
 		httpClient         *http.Client
-	}
-
-	HTTPRequester interface {
-		Do(*http.Request) (*http.Response, error)
 	}
 )
 
@@ -98,6 +95,12 @@ func (s *Seedr) HLS(id int) (string, error) {
 }
 
 func (s *Seedr) FinalURL(endpoint string) (string, error) {
+	req, err := http.NewRequest("GET", baseURL+endpoint, nil)
+	if err != nil {
+		return "", err
+	}
+
+	req.SetBasicAuth(s.username, s.password)
 	redirectedURL := ""
 
 	s.httpClient.CheckRedirect = func(req *http.Request, via []*http.Request) error {
@@ -105,7 +108,7 @@ func (s *Seedr) FinalURL(endpoint string) (string, error) {
 		return errRedirectNotAllowed
 	}
 
-	_, err := s.httpClient.Get(baseURL + endpoint)
+	_, err = s.httpClient.Do(req)
 	if urlError, ok := err.(*url.Error); !ok || urlError.Err != errRedirectNotAllowed {
 		return "", err
 	}
@@ -124,6 +127,41 @@ func (s *Seedr) Get(endpoint string, v interface{}) error {
 	resp, err := s.httpClient.Do(req)
 	if err != nil {
 		return err
+	}
+	return json.NewDecoder(resp.Body).Decode(v)
+}
+
+type DownloadResponse struct {
+	Result        bool   `json:"result"`
+	Code          int    `json:"code,omitempty"`
+	UserTorrentID int    `json:"user_torrent_id,omitempty"`
+	Title         string `json:"title,omitempty"`
+	TorrentHash   string `json:"torrent_hash,omitempty"`
+	Error         string `json:"error,omitempty"`
+}
+
+func (s *Seedr) Download(u string) (*DownloadResponse, error) {
+	result := &DownloadResponse{}
+	values := &url.Values{}
+	values.Add("url", u)
+	return result, s.Post("torrent/url", values, result)
+}
+
+func (s *Seedr) Post(endpoint string, values *url.Values, v interface{}) error {
+	req, err := http.NewRequest("POST", baseURL+endpoint, strings.NewReader(values.Encode()))
+	if err != nil {
+		return err
+	}
+
+	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
+	req.SetBasicAuth(s.username, s.password)
+
+	resp, err := s.httpClient.Do(req)
+	if err != nil {
+		return err
+	}
+	if resp.StatusCode != http.StatusOK {
+		return fmt.Errorf("error making POST request. Status code: %d", resp.StatusCode)
 	}
 
 	return json.NewDecoder(resp.Body).Decode(v)
