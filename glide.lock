@@ -1,28 +1,30 @@
-hash: a01627eb9290f1a66a4403ab9db2c9f9f6d550b2c3b94be6acd828e33bef7406
-updated: 2018-07-25T16:22:32.073352558+02:00
+hash: 7a68fb5b3c4cb0482091204f594ae6c7dc7041b596e6d8a00f190f9140fb1573
+updated: 2018-11-20T21:51:17.580518496+01:00
 imports:
 - name: github.com/andybalholm/cascadia
-  version: 901648c87902174f774fac311d7f176f8647bdaa
+  version: 680b6a57bda4f657485ad44bdea42342ead737bc
 - name: github.com/beevik/guid
   version: d0ea8faecee03ccdfb5ab8322d5d9037bb7af438
 - name: github.com/bitly/go-simplejson
-  version: 0c965951289cce37dec52ad1f34200fefc816777
+  version: 9db4a59bd4d803ae0c173a7d8a538e056cd59d57
 - name: github.com/BurntSushi/toml
-  version: a368813c5e648fee92e5f6c30e3944ff9d5e8895
+  version: 3012a1dbe2e4bd1391d42b32f0577cb7bbc7f005
 - name: github.com/CrowdSurge/banner
   version: 8c0e79dc5ff70fb2919f0d662f44fd72ccdf9be2
   subpackages:
   - fonts
+- name: github.com/dustin/go-humanize
+  version: 9f541cc9db5d55bce703bd99987c9d5cb8eea45e
 - name: github.com/fsnotify/fsnotify
-  version: 4da3e2cfbabc9f751898f250b49f2439785783a1
+  version: ccc981bf80385c528a65fbfdd49bf2d8da22aa23
 - name: github.com/ghodss/yaml
-  version: e9ed3c6dfb39bb1a32197cb10d527906fe4da4b6
+  version: c7ce16629ff4cd059ed96ed06419dd3856fd3577
 - name: github.com/gorilla/websocket
-  version: eb925808374e5ca90c83401a40d711dc08c0c0f6
+  version: 483fb8d7c32fcb4b5636cd293a92e3935932e2f4
 - name: github.com/hackebrot/turtle
-  version: 6bbdbf8123bdafb8c3db0c0fc5db11bf3d2fb500
+  version: a7f0ff34fdd62b552db01c81dff3cf029e0c2889
 - name: github.com/hashicorp/hcl
-  version: 8f6b1344a92ff8877cf24a5de9177bf7d0a2a187
+  version: 65a6292f0157eff210d03ed1bf6c59b190b8b906
   subpackages:
   - hcl/ast
   - hcl/parser
@@ -33,11 +35,11 @@ imports:
   - json/scanner
   - json/token
 - name: github.com/imdario/mergo
-  version: 9316a62528ac99aaecb4e47eadd6dc8aa6533d58
+  version: 9f23e2d6bd2a77f959b2bf6acdbefd708a83a4a4
 - name: github.com/inconshreveable/mousetrap
   version: 76626ae9c91c4f2a10f34cad8ce83ea42c93bb75
 - name: github.com/jessfraz/ship
-  version: c371a49613899b456490b3bcd718944798dbd156
+  version: bd27ef7640da94754782fffff00819bcb42229c7
   subpackages:
   - aftership
 - name: github.com/micro/go-config
@@ -55,30 +57,32 @@ imports:
   - source/envvar
   - source/file
 - name: github.com/nlopes/slack
-  version: 8ab4d0b364ef1e9af5d102531da20d5ec902b6c4
-- name: github.com/Pallinder/go-randomdata
-  version: 15df0648130a623e418886f81b2aaecd0a00547b
-- name: github.com/parnurzeal/gorequest
-  version: a578a48e8d6ca8b01a3b18314c43c6716bb5f5a3
-- name: github.com/PuerkitoBio/goquery
-  version: dc2ec5c7ca4d9aae063b79b9f581dd3ea6afd2b2
-- name: github.com/spf13/cobra
-  version: ef82de70bb3f60c65fb8eebacbb2d122ef517385
-- name: github.com/spf13/pflag
-  version: 583c0c0531f06d5278b7d917446061adc344b5cd
-- name: golang.org/x/net
-  version: 66aacef3dd8a676686c7ae3716979581e8b03c47
+  version: 5963eafd777b358970eea7319fb26d8effc9ebf1
   subpackages:
-  - context
-  - context/ctxhttp
+  - slackutilsx
+- name: github.com/Pallinder/go-randomdata
+  version: 97a2356fcab20708fb8ae46cbbf69a5bc9feca63
+- name: github.com/parnurzeal/gorequest
+  version: 9433d8c3b4c5f3bbeca487a6a410008eab3ce5ee
+- name: github.com/pkg/errors
+  version: 059132a15dd08d6704c67711dae0cf35ab991756
+- name: github.com/PuerkitoBio/goquery
+  version: 2d2796f41742ece03e8086188fa4db16a3a0b458
+- name: github.com/spf13/cobra
+  version: fe5e611709b0c57fa4a89136deaa8e1d4004d053
+- name: github.com/spf13/pflag
+  version: aea12ed6721610dc6ed40141676d7ab0a1dac9e9
+- name: golang.org/x/net
+  version: adae6a3d119ae4890b46832a2e88a95adc62b8e7
+  subpackages:
   - html
   - html/atom
 - name: golang.org/x/sys
-  version: 9aade4d3a3b7e6d876cd3823ad20ec45fc035402
+  version: ec83556a53fe16b65c452a104ea9d1e86a671852
   subpackages:
   - unix
 - name: google.golang.org/api
-  version: e0f3bfad25321f7b0777b3ab35a0503dcb221744
+  version: 83a9d304b1e613fc253e1e2710778642fe81af53
   subpackages:
   - gensupport
   - googleapi
@@ -86,7 +90,7 @@ imports:
   - googleapi/transport
   - youtube/v3
 - name: gopkg.in/yaml.v2
-  version: eb3733d160e74a9c7e442f435eb3bea458e1d19f
+  version: 5420a8b6744d3b0345ab293f6fcba19c978f1183
 - name: mvdan.cc/xurls
-  version: d315b61cf6727664f310fa87b3197e9faf2a8513
+  version: e52e821cbfe8fe163ff6f8628ab5869b11fc05af
 testImports: []

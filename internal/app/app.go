@@ -2,6 +2,8 @@ package app
 
 import (
 	"context"
+	"github.com/disiqueira/ultraslackbot/pkg/command/pokequest"
+	"github.com/disiqueira/ultraslackbot/pkg/command/uptime"
 	"log"
 	"os"
 
@@ -152,6 +154,8 @@ func (a *App) Run(cmd *cobra.Command, args []string) {
 		bible.NewBibleCommand(),
 		seedr.NewSeedrCommand(seedrUsername.(string), seedrPassword.(string)),
 		watch.NewWatchCommand(seedrUsername.(string), seedrPassword.(string)),
+		pokequest.NewPokeQuestCommand(),
+		uptime.NewUptimeCommand(),
 	}
 
 	handlerList := []bot.Handler{

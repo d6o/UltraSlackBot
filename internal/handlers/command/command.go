@@ -7,8 +7,8 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/disiqueira/ultraslackbot/internal/bot"
-	"github.com/disiqueira/ultraslackbot/pkg/slack"
 	usbctx "github.com/disiqueira/ultraslackbot/internal/context"
+	"github.com/disiqueira/ultraslackbot/pkg/slack"
 )
 
 type (
@@ -31,10 +31,10 @@ const (
 func New(cmdList []*cobra.Command) *Command {
 	c := &Command{
 		cmd: &cobra.Command{
-			Use:   "!",
-			Short: "The best slack bot in the world.",
+			Use:           "!",
+			Short:         "The best slack bot in the world.",
 			SilenceErrors: false,
-			SilenceUsage: false,
+			SilenceUsage:  false,
 			Run: func(cmd *cobra.Command, args []string) {
 				cmd.Help()
 			},
