@@ -54,9 +54,9 @@ func (s *tip) tip() (string, error) {
 
 	switch s.nextTip() {
 	case 1:
-		return fmt.Sprintf("The secret Pokemon is %.1f meters tall", float32(pokemon.Height)/10), nil
+		return fmt.Sprintf("The Pokemon is %.1f meters tall", float32(pokemon.Height)/10), nil
 	case 2:
-		return fmt.Sprintf("The secret Pokemon weighs %.1f kilos", float32(pokemon.Weight)/10), nil
+		return fmt.Sprintf("The Pokemon weighs %.1f kilos", float32(pokemon.Weight)/10), nil
 	case 3:
 		return fmt.Sprintf("If you defeat this Pokemon you'll get %d xp", pokemon.BaseExperience), nil
 	case 4:
@@ -78,7 +78,7 @@ func (s *tip) tip() (string, error) {
 		}
 		return "This an adult Pokemon", nil
 	case 10:
-		return fmt.Sprintf("This a %s Pokemon", species.Color.Name), nil
+		return fmt.Sprintf("Color: %s", species.Color.Name), nil
 	case 11:
 		return fmt.Sprintf("Egg-type: %s", strings.Join(species.AllEggGroups(), ", ")), nil
 	case 12:

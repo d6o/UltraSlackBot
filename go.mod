@@ -1,0 +1,30 @@
+module github.com/disiqueira/ultraslackbot
+
+require (
+	github.com/BurntSushi/toml v0.3.0
+	github.com/CrowdSurge/banner v0.0.0-20140923200336-8c0e79dc5ff7
+	github.com/Pallinder/go-randomdata v1.1.0
+	github.com/PuerkitoBio/goquery v1.5.0
+	github.com/andybalholm/cascadia v1.0.0
+	github.com/beevik/guid v0.0.0-20170504223318-d0ea8faecee0
+	github.com/bitly/go-simplejson v0.0.0-20181114203107-9db4a59bd4d8
+	github.com/dustin/go-humanize v1.0.0
+	github.com/fsnotify/fsnotify v1.4.7
+	github.com/ghodss/yaml v0.0.0-20150909031657-73d445a93680
+	github.com/gorilla/websocket v0.0.0-20180306181548-eb925808374e
+	github.com/hackebrot/turtle v0.1.0
+	github.com/hashicorp/hcl v0.0.0-20160711231752-d8c773c4cba1
+	github.com/imdario/mergo v0.0.0-20141206190957-6633656539c1
+	github.com/inconshreveable/mousetrap v1.0.0
+	github.com/jessfraz/ship v0.0.6
+	github.com/micro/go-config v0.6.0
+	github.com/nlopes/slack v0.4.0
+	github.com/parnurzeal/gorequest v0.2.15
+	github.com/spf13/cobra v0.0.3
+	github.com/spf13/pflag v1.0.3
+	golang.org/x/net v0.0.0-20181114220301-adae6a3d119a
+	golang.org/x/sys v0.0.0-20180909124046-d0be0721c37e
+	google.golang.org/api v0.0.0-20180702000508-e0f3bfad2532
+	gopkg.in/yaml.v2 v2.2.1
+	mvdan.cc/xurls v1.1.0
+)
