@@ -21,11 +21,12 @@ func newTipCommand(pokeData *pokeData) *cobra.Command {
 		Example: "tip",
 		Args:    cobra.NoArgs,
 		Run: func(cmd *cobra.Command, args []string) {
-			result, err := h.tip()
+			num, tip, err := h.tip()
 			if err != nil {
-				result = err.Error()
+				tip = err.Error()
 			}
-			cmd.OutOrStdout().Write([]byte(result))
+			pokeData.tips[num] = tip
+			cmd.OutOrStdout().Write([]byte(fmt.Sprintf("%d - %s", num, tip)))
 		},
 		Aliases: []string{"tip"},
 	}
@@ -39,74 +40,74 @@ func newTip(pokeData *pokeData) *tip {
 	}
 }
 
-func (s *tip) tip() (string, error) {
+func (s *tip) tip() (int, string, error) {
 	if s.pokeData.current == 0 {
-		return "", fmt.Errorf("use '!pokequest start' to start a new game")
+		return 0, "", fmt.Errorf("use '!pokequest start' to start a new game")
 	}
 
 	pokemon, err := s.pokeData.api.Pokemon(s.pokeData.current)
 	if err != nil {
-		return "", err
+		return 0, "", err
 	}
 
 	characteristics, _ := s.pokeData.api.Characteristic(s.pokeData.current)
 	species, _ := s.pokeData.api.Species(s.pokeData.current)
 
-	switch s.nextTip() {
+	tip := s.nextTip()
+	switch tip {
 	case 1:
-		return fmt.Sprintf("The Pokemon is %.1f meters tall", float32(pokemon.Height)/10), nil
+		return tip, fmt.Sprintf("The Pokemon is %.1f meters tall", float32(pokemon.Height)/10), nil
 	case 2:
-		return fmt.Sprintf("The Pokemon weighs %.1f kilos", float32(pokemon.Weight)/10), nil
+		return tip, fmt.Sprintf("The Pokemon weighs %.1f kilos", float32(pokemon.Weight)/10), nil
 	case 3:
-		return fmt.Sprintf("If you defeat this Pokemon you'll get %d xp", pokemon.BaseExperience), nil
+		return tip, fmt.Sprintf("If you defeat this Pokemon you'll get %d xp", pokemon.BaseExperience), nil
 	case 4:
-		return fmt.Sprintf("Types: %s ", strings.Join(pokemon.AllTypes(), ", ")), nil
+		return tip, fmt.Sprintf("This is a %s Pokemon", strings.Join(pokemon.AllTypes(), ", ")), nil
 	case 5:
-		return fmt.Sprintf("Stats: %s ", strings.Join(pokemon.AllStats(), ", ")), nil
+		return tip, fmt.Sprintf("This is a strong one, look at this stats: %s ", strings.Join(pokemon.AllStats(), ", ")), nil
 	case 6:
-		return fmt.Sprintf("Descriptions: %s ", strings.Join(characteristics.AllDescriptions(), ", ")), nil
+		return tip, fmt.Sprintf("Descriptions: %s ", strings.Join(characteristics.AllDescriptions(), ", ")), nil
 	case 7:
-		return fmt.Sprintf("Base Happiness: %d ", species.BaseHappiness), nil
+		return tip, fmt.Sprintf("You got the happiest Pokemon on Earth: %d ", species.BaseHappiness), nil
 	case 8:
 		if species.HasGenderDifferences {
-			return "This Pokemon has male and female gender", nil
+			return tip, "This Pokemon has gender differences", nil
 		}
-		return "This is a genderless Pokemon", nil
+		return tip, "This Pokemon does not has gender differences", nil
 	case 9:
 		if species.IsBaby {
-			return "This a baby Pokemon", nil
+			return tip, "This a baby Pokemon", nil
 		}
-		return "This an adult Pokemon", nil
+		return tip, "This an adult Pokemon", nil
 	case 10:
-		return fmt.Sprintf("Color: %s", species.Color.Name), nil
+		return tip, fmt.Sprintf("This is a beutiful %s Pokemon", species.Color.Name), nil
 	case 11:
-		return fmt.Sprintf("Egg-type: %s", strings.Join(species.AllEggGroups(), ", ")), nil
+		return tip, fmt.Sprintf("If you wanna bread this Pokemon, start looking for some %s eggs", strings.Join(species.AllEggGroups(), ", ")), nil
 	case 12:
-		return fmt.Sprintf("Generation: %s", species.Generation.Name), nil
+		return tip, fmt.Sprintf("This Pokemon belongs to the BEST generation: %s", species.Generation.Name), nil
 	case 13:
-		return fmt.Sprintf("Habitat: %s", species.Habitat.Name), nil
+		return tip, fmt.Sprintf("Prepare your bagpack, to find your Pokemon you need to get to some %s", species.Habitat.Name), nil
 	case 14:
-		return fmt.Sprintf("Growth Rate: %s", species.GrowthRate.Name), nil
+		return tip, fmt.Sprintf("I don't know if this is gonna help you, but this is the Growth rate of your Pokemon: %s", species.GrowthRate.Name), nil
 	case 15:
-		return fmt.Sprintf("Shape: %s", species.Shape.Name), nil
+		return tip, fmt.Sprintf("We can categorize every Pokemon based on his shape, the Pokemon you're looking for has a %s shape", species.Shape.Name), nil
 	case 0:
 		if species.EvolvesFromSpecies.Name != "" {
-			return "This Pokemon is an evolution.", nil
+			return tip, "This Pokemon is an evolution.", nil
 		}
 
-		return "This is the first state of this Pokemon.", nil
+		return tip, "This is the first state of this Pokemon.", nil
 	default:
-		return "No more tips for you.", nil
+		return 0, "No more tips for you.", nil
 	}
 
-	return "oops error :(", nil
+	return 0, "oops error :(", nil
 }
 
 func (s *tip) nextTip() int {
 	for {
 		i := rand.Intn(16)
-		if !s.pokeData.tips[i] {
-			s.pokeData.tips[i] = true
+		if s.pokeData.tips[i] == "" {
 			return i
 		}
 		if len(s.pokeData.tips) > 15 {

@@ -10,7 +10,7 @@ type (
 		api     pokeapi.Poke
 		current int
 		limit   int
-		tips    map[int]bool
+		tips    map[int]string
 	}
 )
 
@@ -24,7 +24,7 @@ func NewPokeQuestCommand() *cobra.Command {
 	data := &pokeData{
 		api:   pokeClient,
 		limit: genLimit,
-		tips:  map[int]bool{},
+		tips:  map[int]string{},
 	}
 
 	c := &cobra.Command{
@@ -40,6 +40,7 @@ func NewPokeQuestCommand() *cobra.Command {
 	c.AddCommand(newStartCommand(data))
 	c.AddCommand(newTipCommand(data))
 	c.AddCommand(newGuessCommand(data))
+	c.AddCommand(newTipsCommand(data))
 
 	return c
 }

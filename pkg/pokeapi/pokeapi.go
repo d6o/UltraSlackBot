@@ -270,7 +270,7 @@ func (p *poke) Get(url string, v interface{}) error {
 	}
 
 	if resp.StatusCode != http.StatusOK {
-		return fmt.Errorf("error making GET request to %s. StatusCode: %response", resp.Request.URL, resp.StatusCode)
+		return fmt.Errorf("error making GET request to %s. StatusCode: %d", resp.Request.URL, resp.StatusCode)
 	}
 
 	return json.NewDecoder(resp.Body).Decode(v)
@@ -295,6 +295,9 @@ func (r *GetPokemonResponse) AllStats() []string {
 func (r *GetCharacteristicResponse) AllDescriptions() []string {
 	var desc []string
 	for _, s := range r.Descriptions {
+		if s.Language.Name != "en" {
+			continue
+		}
 		desc = append(desc, s.Description)
 	}
 	return desc
