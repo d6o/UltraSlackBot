@@ -66,7 +66,7 @@ func (s *tip) tip() (int, string, error) {
 	case 5:
 		return tip, fmt.Sprintf("This is a strong one, look at this stats: %s ", strings.Join(pokemon.AllStats(), ", ")), nil
 	case 6:
-		return tip, fmt.Sprintf("Descriptions: %s ", strings.Join(characteristics.AllDescriptions(), ", ")), nil
+		return tip, fmt.Sprintf("The best way to describe the Pokemon your looking for: %s ", strings.Join(characteristics.AllDescriptions(), ", ")), nil
 	case 7:
 		return tip, fmt.Sprintf("You got the happiest Pokemon on Earth: %d ", species.BaseHappiness), nil
 	case 8:

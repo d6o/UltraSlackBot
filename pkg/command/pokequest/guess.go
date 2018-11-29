@@ -51,5 +51,6 @@ func (s *guess) guess(guess string) (string, error) {
 		return fmt.Sprintf("Sorry but %s is not the right answer.", guess), nil
 	}
 
-	return resp.Sprites.FrontDefault, nil
+	msg := fmt.Sprintf("You are the best Pokemon Master ever! Keep up your training %s", resp.Sprites.FrontDefault)
+	return msg, nil
 }
