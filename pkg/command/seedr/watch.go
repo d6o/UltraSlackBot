@@ -1,8 +1,9 @@
 package seedr
 
 import (
-	"github.com/spf13/cobra"
 	"strconv"
+
+	"github.com/spf13/cobra"
 )
 
 func NewSeedrWatchCommand(m *seedrManager) *cobra.Command {
@@ -11,7 +12,7 @@ func NewSeedrWatchCommand(m *seedrManager) *cobra.Command {
 		Short:   "Get the Stream URL to watch a file",
 		Example: example,
 		Args:    cobra.ExactArgs(1),
-		Run: runWatch(m),
+		Run:     runWatch(m),
 	}
 
 	return c
@@ -19,7 +20,7 @@ func NewSeedrWatchCommand(m *seedrManager) *cobra.Command {
 
 func runWatch(m *seedrManager) runFunc {
 	return func(cmd *cobra.Command, args []string) {
-		id, err  := strconv.Atoi(args[0])
+		id, err := strconv.Atoi(args[0])
 		if err != nil {
 			cmd.OutOrStdout().Write([]byte(err.Error()))
 			return

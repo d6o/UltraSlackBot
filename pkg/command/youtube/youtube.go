@@ -31,8 +31,8 @@ const (
 type (
 	youtube struct {
 		youtubeService *yt.Service
-		total int
-		skip  int
+		total          int
+		skip           int
 	}
 )
 
@@ -56,13 +56,13 @@ func NewYoutubeCommand(key string) *cobra.Command {
 		Aliases: []string{"video", "yt", "y"},
 	}
 
-	c.Flags().IntVarP(&y.total, "total", "t",1, "How many results will be returned")
-	c.Flags().IntVarP(&y.skip, "skip","s", 0, "How many results should be skipped")
+	c.Flags().IntVarP(&y.total, "total", "t", 1, "How many results will be returned")
+	c.Flags().IntVarP(&y.skip, "skip", "s", 0, "How many results should be skipped")
 
 	return c
 }
 
-func newYoutube(key string) (*youtube,error) {
+func newYoutube(key string) (*youtube, error) {
 	client := &http.Client{
 		Transport: &transport.APIKey{Key: key},
 	}
@@ -81,7 +81,7 @@ func newYoutube(key string) (*youtube,error) {
 func (y *youtube) search(q string) (string, error) {
 	call := y.youtubeService.Search.List("id,snippet").
 		Q(q).Type("video").
-		MaxResults(int64(y.total+y.skip))
+		MaxResults(int64(y.total + y.skip))
 	response, err := call.Do()
 	if err != nil {
 		return "", fmt.Errorf("error making search API call: %v", err)

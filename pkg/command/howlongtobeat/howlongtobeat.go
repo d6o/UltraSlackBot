@@ -1,11 +1,12 @@
 package howlongtobeat
 
 import (
-	"github.com/spf13/cobra"
 	"net/http"
 	"net/url"
-	"github.com/PuerkitoBio/goquery"
 	"strings"
+
+	"github.com/PuerkitoBio/goquery"
+	"github.com/spf13/cobra"
 )
 
 const (
@@ -52,8 +53,8 @@ func NewHLTBCommand() *cobra.Command {
 		Aliases: []string{"hltb"},
 	}
 
-	c.Flags().IntVarP(&h.total, "total", "t",1, "Total of results to print")
-	c.Flags().IntVarP(&h.skip, "skip","s", 0, "How many results should be skipped")
+	c.Flags().IntVarP(&h.total, "total", "t", 1, "Total of results to print")
+	c.Flags().IntVarP(&h.skip, "skip", "s", 0, "How many results should be skipped")
 
 	return c
 }
@@ -66,8 +67,8 @@ func (h *hltb) search(text string) (string, error) {
 	resp, err := http.PostForm(hltbURL,
 		url.Values{
 			"queryString": {text},
-			"t": {"games"},
-			"sorthead": {"popular"},
+			"t":           {"games"},
+			"sorthead":    {"popular"},
 		})
 	if err != nil {
 		return "", err
@@ -100,7 +101,7 @@ func (h *hltb) search(text string) (string, error) {
 			if len(strings.TrimSpace(div.FirstChild.Data)) < 1 {
 				continue
 			}
-			timeList = append(timeList,div.FirstChild.Data)
+			timeList = append(timeList, div.FirstChild.Data)
 		}
 
 		for i := range typeList {
@@ -116,9 +117,9 @@ func (h *hltb) search(text string) (string, error) {
 			continue
 		}
 
-		msg := name+ "\n"
-		for t,v := range game {
-			msg += t+": "+v+ "\n"
+		msg := name + "\n"
+		for t, v := range game {
+			msg += t + ": " + v + "\n"
 		}
 		msgList = append(msgList, msg)
 

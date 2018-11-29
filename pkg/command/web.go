@@ -1,8 +1,8 @@
 package command
 
 import (
-	"net/http"
 	"encoding/json"
+	"net/http"
 )
 
 func GetJSON(url string, obj interface{}) error {

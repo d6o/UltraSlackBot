@@ -4,10 +4,11 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/spf13/cobra"
-	"net/url"
-	"github.com/disiqueira/ultraslackbot/pkg/command"
 	"errors"
+	"net/url"
+
+	"github.com/disiqueira/ultraslackbot/pkg/command"
+	"github.com/spf13/cobra"
 )
 
 const (
@@ -35,7 +36,7 @@ type (
 			Error   bool `json:"error"`
 			Pods    []struct {
 				Title   string `json:"title"`
-				Primary bool `json:"primary,omitempty"`
+				Primary bool   `json:"primary,omitempty"`
 				SubPods []struct {
 					Plaintext string `json:"plaintext"`
 				} `json:"subpods"`
@@ -67,7 +68,7 @@ func NewWolframCommand(key string) *cobra.Command {
 
 func newWolfram(key string) *wolfram {
 	return &wolfram{
-		key:key,
+		key: key,
 	}
 }
 

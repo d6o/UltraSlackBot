@@ -1,16 +1,17 @@
 package lenny
 
 import (
-	"github.com/spf13/cobra"
-	"strings"
 	"fmt"
+	"strings"
+
 	"github.com/disiqueira/ultraslackbot/pkg/command"
+	"github.com/spf13/cobra"
 )
 
 const (
 	lennyURL = "https://api.lenny.today/v1/random?limit=%d"
 	maxTotal = 5
-	example = `
+	example  = `
 		# Get a random Lenny
 		!lenny random
 
@@ -46,7 +47,7 @@ func newRandomCommand() *cobra.Command {
 		Aliases: []string{"lenny"},
 	}
 
-	c.Flags().IntVarP(&h.total, "total", "t",1, "Total of results to print")
+	c.Flags().IntVarP(&h.total, "total", "t", 1, "Total of results to print")
 
 	return c
 }

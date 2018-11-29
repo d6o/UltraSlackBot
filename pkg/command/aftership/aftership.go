@@ -77,7 +77,7 @@ func (as *afterShip) list() (string, error) {
 
 	var msgList []string
 
-	for _,t := range trackingList {
+	for _, t := range trackingList {
 		msgList = append(msgList, as.formatTracking(t))
 	}
 

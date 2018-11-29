@@ -3,10 +3,11 @@ package bot
 import (
 	"context"
 	"errors"
+	"strings"
+	"time"
+
 	usbCtx "github.com/disiqueira/ultraslackbot/internal/context"
 	"github.com/disiqueira/ultraslackbot/pkg/slack"
-	"time"
-	"strings"
 )
 
 type (
@@ -61,8 +62,8 @@ const messageBufferSize = 1024
 
 func New(slack SlackClient) *Bot {
 	return &Bot{
-		slack:    slack,
-		msgList:  make(chan Message, messageBufferSize),
+		slack:   slack,
+		msgList: make(chan Message, messageBufferSize),
 	}
 }
 

@@ -6,9 +6,9 @@ import (
 
 func NewRandomCommand() *cobra.Command {
 	c := &cobra.Command{
-		Use:     "random",
-		Short:   "Generate random data",
-		Args:    cobra.NoArgs,
+		Use:   "random",
+		Short: "Generate random data",
+		Args:  cobra.NoArgs,
 		Run: func(cmd *cobra.Command, args []string) {
 			cmd.Help()
 		},

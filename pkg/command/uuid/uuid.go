@@ -1,8 +1,8 @@
 package uuid
 
 import (
-	"github.com/spf13/cobra"
 	"github.com/beevik/guid"
+	"github.com/spf13/cobra"
 )
 
 func NewUUIDCommand() *cobra.Command {

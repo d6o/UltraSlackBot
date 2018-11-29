@@ -10,7 +10,7 @@ import (
 
 const (
 	downFormat = "%s is down: %s"
-	upFormat = "%s is up!"
+	upFormat   = "%s is up!"
 
 	example = `
 		# Check if google is available to the bot server
@@ -47,7 +47,7 @@ func NewIsUpCommand() *cobra.Command {
 
 func newChecker(c *http.Client) *checker {
 	return &checker{
-		client:c,
+		client: c,
 	}
 }
 

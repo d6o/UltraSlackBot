@@ -1,8 +1,9 @@
 package seedr
 
 import (
-	"github.com/spf13/cobra"
 	"strconv"
+
+	"github.com/spf13/cobra"
 )
 
 type (
@@ -23,7 +24,7 @@ func NewSeedrFolderCommand(m *seedrManager) *cobra.Command {
 
 func runFolder(m *seedrManager) runFunc {
 	return func(cmd *cobra.Command, args []string) {
-		id, err  := strconv.Atoi(args[0])
+		id, err := strconv.Atoi(args[0])
 		if err != nil {
 			cmd.OutOrStdout().Write([]byte(err.Error()))
 			return

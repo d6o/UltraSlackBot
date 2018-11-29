@@ -4,9 +4,10 @@ import (
 	"fmt"
 	"strings"
 
+	"context"
+
 	"github.com/disiqueira/ultraslackbot/internal/bot"
 	"github.com/disiqueira/ultraslackbot/pkg/slack"
-	"context"
 )
 
 type (

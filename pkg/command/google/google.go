@@ -1,8 +1,9 @@
 package google
 
 import (
-	"github.com/disiqueira/ultraslackbot/pkg/command"
 	"net/url"
+
+	"github.com/disiqueira/ultraslackbot/pkg/command"
 )
 
 const (

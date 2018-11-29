@@ -3,8 +3,8 @@ package random
 import (
 	"fmt"
 
-	"github.com/spf13/cobra"
 	"github.com/Pallinder/go-randomdata"
+	"github.com/spf13/cobra"
 )
 
 const (
@@ -43,7 +43,7 @@ func newNumber() *number {
 	return &number{}
 }
 
-func (n *number) reset(){
+func (n *number) reset() {
 	n.min = 0
 	n.max = 100
 }

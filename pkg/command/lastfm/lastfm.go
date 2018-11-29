@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/spf13/cobra"
 	"github.com/disiqueira/ultraslackbot/pkg/command"
+	"github.com/spf13/cobra"
 )
 
 const (
@@ -32,7 +32,7 @@ type (
 				Artist struct {
 					Text string `json:"#text"`
 				} `json:"artist"`
-				Name       string `json:"name"`
+				Name string `json:"name"`
 			} `json:"track"`
 		} `json:"recenttracks"`
 	}
@@ -61,7 +61,7 @@ func NewLastFMCommand(key string) *cobra.Command {
 
 func newLastFM(key string) *lastfm {
 	return &lastfm{
-		key:key,
+		key: key,
 	}
 }
 

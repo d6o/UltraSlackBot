@@ -1,22 +1,23 @@
 package clarifai
 
 import (
-	"errors"
 	"bytes"
-	"net/http"
-	"fmt"
-	"strings"
 	"encoding/json"
+	"errors"
+	"fmt"
+	"net/http"
+	"strings"
+
+	"io/ioutil"
 
 	"github.com/spf13/cobra"
 	"mvdan.cc/xurls"
-	"io/ioutil"
 )
 
 const (
-	urlClarifai = "https://api.clarifai.com/v2/models/%s/outputs"
+	urlClarifai     = "https://api.clarifai.com/v2/models/%s/outputs"
 	requestClarifai = "{\"inputs\":[{\"data\":{\"image\":{\"url\":\"%s\"}}}]}"
-	okClarifai  = "Ok"
+	okClarifai      = "Ok"
 
 	example = `
 		# Ask a question
@@ -65,7 +66,7 @@ func NewClarifaiCommand(key, model string) *cobra.Command {
 		Example: example,
 		Args:    cobra.MinimumNArgs(1),
 		Run: func(cmd *cobra.Command, args []string) {
-			r, err := cla.Analyze(strings.Join(args," "))
+			r, err := cla.Analyze(strings.Join(args, " "))
 			if err != nil {
 				r = err.Error()
 			}
@@ -147,4 +148,3 @@ func (c *clarifai) Analyze(url string) (string, error) {
 	return strings.Join(msgList, "\n"), nil
 
 }
-

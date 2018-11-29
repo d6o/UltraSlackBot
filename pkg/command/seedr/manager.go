@@ -2,8 +2,9 @@ package seedr
 
 import (
 	"fmt"
-	"github.com/disiqueira/ultraslackbot/pkg/seedr"
 	"strings"
+
+	"github.com/disiqueira/ultraslackbot/pkg/seedr"
 )
 
 const (

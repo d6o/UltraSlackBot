@@ -4,33 +4,34 @@ import (
 	"fmt"
 	"path"
 
+	"strings"
+
 	"github.com/micro/go-config"
 	"github.com/micro/go-config/source"
-	"github.com/micro/go-config/source/file"
 	"github.com/micro/go-config/source/envvar"
-	"strings"
+	"github.com/micro/go-config/source/file"
 )
 
 type (
 	spec struct {
-		data map[string]interface{}
+		data   map[string]interface{}
 		config Config
 	}
 
- 	Config interface {
+	Config interface {
 		Load(source ...source.Source) error
 		Map() map[string]interface{}
 	}
 )
 
 const (
-	configNameBasic = "config"
+	configNameBasic    = "config"
 	configNameAdvanced = "ultraslackbot"
-	envVarPrefix = "USB"
+	envVarPrefix       = "USB"
 )
 
 var (
-	extensions = [...]string {
+	extensions = [...]string{
 		"json",
 		"xml",
 		"yaml",
@@ -38,7 +39,6 @@ var (
 		"toml",
 	}
 )
-
 
 func Load() *spec {
 	s := newSpec()
@@ -54,7 +54,7 @@ func newSpec() *spec {
 
 func (s *spec) load() {
 	s.config.Load(
-		s.sources()...
+		s.sources()...,
 	)
 
 	s.data = s.config.Map()

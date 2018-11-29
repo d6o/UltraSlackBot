@@ -3,7 +3,7 @@ package emoji
 import (
 	"fmt"
 	"strings"
-	
+
 	"github.com/hackebrot/turtle"
 	"github.com/spf13/cobra"
 )

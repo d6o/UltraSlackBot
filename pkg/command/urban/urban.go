@@ -1,18 +1,18 @@
 package urban
 
 import (
-	"fmt"
-	"strings"
 	"encoding/json"
+	"fmt"
 	"net/http"
+	"strings"
 
 	"github.com/spf13/cobra"
 )
 
 const (
-	searchURL       = "http://api.urbandictionary.com/v0/define?term=%s"
-	referer         = "http://m.urbandictionary.com"
-	noResult		= "no_results"
+	searchURL = "http://api.urbandictionary.com/v0/define?term=%s"
+	referer   = "http://m.urbandictionary.com"
+	noResult  = "no_results"
 
 	example = `
 		# Search for a definition on Urban Dictionary
@@ -24,14 +24,14 @@ const (
 
 type (
 	urban struct {
-		skip  int
+		skip int
 	}
 
 	urbanResponse struct {
-		ResultType string   `json:"result_type"`
+		ResultType string `json:"result_type"`
 		List       []struct {
-			Definition  string    `json:"definition"`
-			Permalink   string    `json:"permalink"`
+			Definition string `json:"definition"`
+			Permalink  string `json:"permalink"`
 		} `json:"list"`
 	}
 )
@@ -54,7 +54,7 @@ func NewUrbanCommand() *cobra.Command {
 		Aliases: []string{"ud"},
 	}
 
-	c.Flags().IntVarP(&w.skip, "skip","s", 0, "How many images should be skipped")
+	c.Flags().IntVarP(&w.skip, "skip", "s", 0, "How many images should be skipped")
 
 	return c
 }

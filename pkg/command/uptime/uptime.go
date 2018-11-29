@@ -1,9 +1,10 @@
 package uptime
 
 import (
+	"time"
+
 	"github.com/dustin/go-humanize"
 	"github.com/spf13/cobra"
-	"time"
 )
 
 func NewUptimeCommand() *cobra.Command {

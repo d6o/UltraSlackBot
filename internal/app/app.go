@@ -2,10 +2,11 @@ package app
 
 import (
 	"context"
-	"github.com/disiqueira/ultraslackbot/pkg/command/pokequest"
-	"github.com/disiqueira/ultraslackbot/pkg/command/uptime"
 	"log"
 	"os"
+
+	"github.com/disiqueira/ultraslackbot/pkg/command/pokequest"
+	"github.com/disiqueira/ultraslackbot/pkg/command/uptime"
 
 	"github.com/spf13/cobra"
 

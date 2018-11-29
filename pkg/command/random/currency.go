@@ -1,8 +1,8 @@
 package random
 
 import (
-	"github.com/spf13/cobra"
 	"github.com/Pallinder/go-randomdata"
+	"github.com/spf13/cobra"
 )
 
 const (

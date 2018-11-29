@@ -2,14 +2,15 @@ package ninegag
 
 import (
 	"errors"
-	"github.com/spf13/cobra"
 	"net/http"
 	"net/url"
+
+	"github.com/spf13/cobra"
 )
 
 const (
 	randomURL = "https://9gag.com/random"
-	example = `
+	example   = `
 		# Get a random 9gag page
 		!9gag`
 )

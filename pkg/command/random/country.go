@@ -3,8 +3,8 @@ package random
 import (
 	"errors"
 
-	"github.com/spf13/cobra"
 	"github.com/Pallinder/go-randomdata"
+	"github.com/spf13/cobra"
 )
 
 const (
@@ -15,8 +15,8 @@ const (
 
 type (
 	country struct {
-		fullName bool
-		twoLetters bool
+		fullName     bool
+		twoLetters   bool
 		threeLetters bool
 	}
 )
@@ -48,14 +48,14 @@ func newCountry() *country {
 	return &country{}
 }
 
-func (c *country) generate() (string, error){
+func (c *country) generate() (string, error) {
 	if c.hasIllegalFlags() {
 		return "", errors.New("--fullname --three and --two are mutually exclusives")
 	}
 	if c.twoLetters {
 		return randomdata.Country(randomdata.TwoCharCountry), nil
 	}
-	if c.threeLetters{
+	if c.threeLetters {
 		return randomdata.Country(randomdata.ThreeCharCountry), nil
 	}
 

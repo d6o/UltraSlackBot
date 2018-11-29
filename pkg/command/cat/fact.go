@@ -7,7 +7,7 @@ import (
 )
 
 const (
-	urlCatFact = "http://catfact.ninja/fact"
+	urlCatFact     = "http://catfact.ninja/fact"
 	exampleCatFact = `
 		# Get a random CatFact page
 		!cat fact`
@@ -15,7 +15,7 @@ const (
 
 type (
 	catFactResponse struct {
-		Fact   string `json:"fact"`
+		Fact string `json:"fact"`
 	}
 )
 

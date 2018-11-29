@@ -3,10 +3,11 @@ package bible
 import (
 	"errors"
 	"fmt"
-	"github.com/disiqueira/ultraslackbot/pkg/command"
-	"github.com/spf13/cobra"
 	"net/url"
 	"strings"
+
+	"github.com/disiqueira/ultraslackbot/pkg/command"
+	"github.com/spf13/cobra"
 )
 
 const (

@@ -7,7 +7,7 @@ import (
 )
 
 const (
-	urlCatPhoto = "http://thecatapi.com/api/images/get?format=src&type=jpg"
+	urlCatPhoto     = "http://thecatapi.com/api/images/get?format=src&type=jpg"
 	examurlCatPhoto = `
 		# Get a random cat photo
 		!cat photo`

@@ -2,16 +2,17 @@ package docs
 
 import (
 	"fmt"
-	"github.com/disiqueira/ultraslackbot/pkg/command"
-	"github.com/spf13/cobra"
 	"net/url"
 	"strings"
+
+	"github.com/disiqueira/ultraslackbot/pkg/command"
+	"github.com/spf13/cobra"
 )
 
 const (
 	urlGoDocs       = "https://api.godoc.org/search?q=%s"
 	errFormatGoDocs = "no result return while searching for: %s"
-	formatGoDocs 	= "%s - http://godoc.org/%s (Stars: %d Imports: %d): %s"
+	formatGoDocs    = "%s - http://godoc.org/%s (Stars: %d Imports: %d): %s"
 )
 
 type (

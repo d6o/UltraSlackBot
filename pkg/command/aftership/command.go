@@ -37,4 +37,3 @@ func NewAfterShipCommand(key string) *cobra.Command {
 
 	return c
 }
-

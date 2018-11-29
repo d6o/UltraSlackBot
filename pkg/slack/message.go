@@ -1,9 +1,10 @@
 package slack
 
 import (
-	"strings"
-	"github.com/nlopes/slack"
 	"errors"
+	"strings"
+
+	"github.com/nlopes/slack"
 )
 
 const (
@@ -12,22 +13,22 @@ const (
 
 type (
 	message struct {
-		text string
+		text    string
 		channel string
-		user User
+		user    User
 	}
 
 	user struct {
 		name string
-		id string
+		id   string
 	}
 )
 
 func NewMessage(text, channel string, user User) Message {
 	return &message{
-		text:text,
-		channel:channel,
-		user:user,
+		text:    text,
+		channel: channel,
+		user:    user,
 	}
 }
 
@@ -53,8 +54,8 @@ func (m message) Command() string {
 
 func NewUser(id, name string) User {
 	return &user{
-		id:id,
-		name:name,
+		id:   id,
+		name: name,
 	}
 }
 

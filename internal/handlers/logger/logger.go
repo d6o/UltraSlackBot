@@ -5,8 +5,8 @@ import (
 	"log"
 
 	"github.com/disiqueira/ultraslackbot/internal/bot"
-	"github.com/disiqueira/ultraslackbot/pkg/slack"
 	usbctx "github.com/disiqueira/ultraslackbot/internal/context"
+	"github.com/disiqueira/ultraslackbot/pkg/slack"
 )
 
 type (
@@ -17,12 +17,12 @@ type (
 
 func New(logger *log.Logger) *Logger {
 	return &Logger{
-		logger:logger,
+		logger: logger,
 	}
 }
 
 func (l *Logger) Execute(ctx context.Context, message slack.Event, botUser bot.UserInfo) ([]slack.Message, error) {
-	usbctx.OutLogger(ctx).Printf("Name: %s Data: %+v\n",message.Name(), message.Data())
+	usbctx.OutLogger(ctx).Printf("Name: %s Data: %+v\n", message.Name(), message.Data())
 	return nil, nil
 }
 

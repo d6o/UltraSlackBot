@@ -2,10 +2,11 @@ package watch
 
 import (
 	"fmt"
-	"github.com/disiqueira/ultraslackbot/pkg/seedr"
-	"github.com/disiqueira/ultraslackbot/pkg/yts"
 	"strings"
 	"time"
+
+	"github.com/disiqueira/ultraslackbot/pkg/seedr"
+	"github.com/disiqueira/ultraslackbot/pkg/yts"
 )
 
 const (

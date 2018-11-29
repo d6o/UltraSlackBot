@@ -3,8 +3,9 @@ package google
 import (
 	"strings"
 
-	"github.com/spf13/cobra"
 	"fmt"
+
+	"github.com/spf13/cobra"
 )
 
 const (
@@ -55,8 +56,8 @@ func NewGoogleImageCommand(key, cx string) *cobra.Command {
 		Aliases: []string{"gis", "pictures", "imagem", "imagens", "gi"},
 	}
 
-	c.Flags().IntVarP(&i.total, "total", "t",1, "How many images will be returned")
-	c.Flags().IntVarP(&i.skip, "skip","s", 0, "How many images should be skipped")
+	c.Flags().IntVarP(&i.total, "total", "t", 1, "How many images will be returned")
+	c.Flags().IntVarP(&i.skip, "skip", "s", 0, "How many images should be skipped")
 
 	return c
 }
@@ -65,7 +66,7 @@ func newGoogleImage(key, cx string) *googleImage {
 	return &googleImage{
 		google{
 			key: key,
-			cx : cx,
+			cx:  cx,
 		},
 	}
 }
@@ -86,4 +87,3 @@ func (gi *googleImage) Search(q string) (string, error) {
 
 	return strings.Join(msgList, "\n"), nil
 }
-

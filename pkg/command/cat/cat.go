@@ -6,9 +6,9 @@ import (
 
 func NewCatCommand() *cobra.Command {
 	c := &cobra.Command{
-		Use:     "cat",
-		Short:   "Everything cat related",
-		Args:    cobra.NoArgs,
+		Use:   "cat",
+		Short: "Everything cat related",
+		Args:  cobra.NoArgs,
 		Run: func(cmd *cobra.Command, args []string) {
 			cmd.Help()
 		},

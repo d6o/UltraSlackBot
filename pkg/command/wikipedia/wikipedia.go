@@ -4,10 +4,11 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/spf13/cobra"
-	"net/url"
-	"github.com/disiqueira/ultraslackbot/pkg/command"
 	"errors"
+	"net/url"
+
+	"github.com/disiqueira/ultraslackbot/pkg/command"
+	"github.com/spf13/cobra"
 )
 
 const (
@@ -33,7 +34,7 @@ type (
 	}
 
 	wikipediaResponse struct {
-		Query         struct {
+		Query struct {
 			Pages map[string]page `json:"pages"`
 		} `json:"query"`
 	}

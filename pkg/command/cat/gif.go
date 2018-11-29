@@ -7,7 +7,7 @@ import (
 )
 
 const (
-	urlCatGif = "http://thecatapi.com/api/images/get?format=src&type=gif"
+	urlCatGif     = "http://thecatapi.com/api/images/get?format=src&type=gif"
 	exampleCatGif = `
 		# Get a random cat gif
 		!cat gif`

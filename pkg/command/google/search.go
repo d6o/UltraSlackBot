@@ -3,8 +3,9 @@ package google
 import (
 	"strings"
 
-	"github.com/spf13/cobra"
 	"fmt"
+
+	"github.com/spf13/cobra"
 )
 
 const (
@@ -55,8 +56,8 @@ func NewGoogleSearchCommand(key, cx string) *cobra.Command {
 		Aliases: []string{"google", "gse", "busca", "g"},
 	}
 
-	c.Flags().IntVarP(&s.total, "total", "t",1, "How many results will be returned")
-	c.Flags().IntVarP(&s.skip, "skip","s", 0, "How many results should be skipped")
+	c.Flags().IntVarP(&s.total, "total", "t", 1, "How many results will be returned")
+	c.Flags().IntVarP(&s.skip, "skip", "s", 0, "How many results should be skipped")
 
 	return c
 }
@@ -65,7 +66,7 @@ func newGoogleSearch(key, cx string) *googleSearch {
 	return &googleSearch{
 		google{
 			key: key,
-			cx : cx,
+			cx:  cx,
 		},
 	}
 }

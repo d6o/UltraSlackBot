@@ -1,13 +1,13 @@
 package main
 
 import (
-	"github.com/disiqueira/ultraslackbot/internal/cli"
 	"math/rand"
 	"time"
+
+	"github.com/disiqueira/ultraslackbot/internal/cli"
 )
 
 func main() {
 	rand.Seed(time.Now().UTC().UnixNano())
 	cli.Execute()
 }
-

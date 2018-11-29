@@ -7,7 +7,7 @@ import (
 )
 
 const (
-	urlChuckNorrisFact = "https://api.icndb.com/jokes/random"
+	urlChuckNorrisFact     = "https://api.icndb.com/jokes/random"
 	exampleChuckNorrisFact = `
 		# Get a random fact about Chuck Norris
 		!chuckNorris`
@@ -16,7 +16,7 @@ const (
 type (
 	chuckNorrisFactResponse struct {
 		Value struct {
-			Joke       string        `json:"joke"`
+			Joke string `json:"joke"`
 		} `json:"value"`
 	}
 )

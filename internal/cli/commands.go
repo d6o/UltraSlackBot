@@ -1,14 +1,15 @@
 package cli
 
 import (
-	"github.com/spf13/cobra"
 	"fmt"
 	"os"
+
 	"github.com/disiqueira/ultraslackbot/internal/app"
+	"github.com/spf13/cobra"
 )
 
 const (
-	errorExitCode   = 1
+	errorExitCode      = 1
 	runLongDescription = `
 Creates a new connection to Slack and starts handling all the new messages
 that receives from it.
@@ -30,7 +31,7 @@ func Execute() {
 		Use:   "run",
 		Short: "Start the Ultra Slack Bot",
 		Long:  runLongDescription,
-		Run: a.Run,
+		Run:   a.Run,
 	}
 
 	rootCmd.AddCommand(runCmd)

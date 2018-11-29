@@ -1,10 +1,11 @@
 package watch
 
 import (
+	"strings"
+
 	"github.com/disiqueira/ultraslackbot/pkg/seedr"
 	"github.com/disiqueira/ultraslackbot/pkg/yts"
 	"github.com/spf13/cobra"
-	"strings"
 )
 
 const (

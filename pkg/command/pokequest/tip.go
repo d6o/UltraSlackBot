@@ -2,9 +2,10 @@ package pokequest
 
 import (
 	"fmt"
-	"github.com/spf13/cobra"
 	"math/rand"
 	"strings"
+
+	"github.com/spf13/cobra"
 )
 
 type (

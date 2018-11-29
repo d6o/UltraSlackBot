@@ -25,4 +25,3 @@ func newAfterShipGetCommand(af *afterShip) *cobra.Command {
 
 	return c
 }
-

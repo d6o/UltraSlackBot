@@ -3,8 +3,8 @@ package random
 import (
 	"errors"
 
-	"github.com/spf13/cobra"
 	"github.com/Pallinder/go-randomdata"
+	"github.com/spf13/cobra"
 )
 
 const (
@@ -21,7 +21,7 @@ const (
 
 type (
 	randomTitle struct {
-		male bool
+		male   bool
 		female bool
 	}
 )
@@ -74,4 +74,3 @@ func (n *randomTitle) reset() {
 	n.female = false
 	n.male = false
 }
-
