@@ -49,9 +49,15 @@ func (s *guess) guess(guess string) (string, error) {
 	guess = strings.TrimSpace(strings.ToLower(guess))
 
 	if resp.Name != guess && strconv.Itoa(s.pokeData.current) != guess {
+		s.pokeData.points -= 2
 		return fmt.Sprintf("Sorry but %s is not the right answer.", guess), nil
 	}
 
-	msg := fmt.Sprintf("You are the best Pokemon Master ever! Keep up your training %s", resp.Sprites.FrontDefault)
+	finalPoints := s.pokeData.points
+	if finalPoints < 0 {
+		finalPoints = 0
+	}
+
+	msg := fmt.Sprintf("You are the best Pokemon Master ever! Keep up your training \n *You got %d Points!! (beta)* %s", finalPoints, resp.Sprites.FrontDefault)
 	return msg, nil
 }

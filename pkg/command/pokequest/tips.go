@@ -13,6 +13,8 @@ func newTipsCommand(pokeData *pokeData) *cobra.Command {
 		Example: "tips",
 		Args:    cobra.NoArgs,
 		Run: func(cmd *cobra.Command, args []string) {
+			cmd.OutOrStdout().Write([]byte(fmt.Sprintf("*Points: %d*\n\n", pokeData.points)))
+
 			for num, tip := range pokeData.tips {
 				cmd.OutOrStdout().Write([]byte(fmt.Sprintf("%d - %s\n", num, tip)))
 			}

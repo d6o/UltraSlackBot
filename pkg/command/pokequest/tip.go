@@ -26,7 +26,11 @@ func newTipCommand(pokeData *pokeData) *cobra.Command {
 			if err != nil {
 				tip = err.Error()
 			}
-			pokeData.tips[num] = tip
+			if num >= 0 {
+				pokeData.tips[num] = tip
+				pokeData.points--
+			}
+			cmd.OutOrStdout().Write([]byte(fmt.Sprintf("*Points: %d*\n\n", pokeData.points)))
 			cmd.OutOrStdout().Write([]byte(fmt.Sprintf("%d - %s", num, tip)))
 		},
 		Aliases: []string{"tip"},
@@ -99,10 +103,10 @@ func (s *tip) tip() (int, string, error) {
 
 		return tip, "This is the first state of this Pokemon.", nil
 	default:
-		return 0, "No more tips for you.", nil
+		return -1, "No more tips for you.", nil
 	}
 
-	return 0, "oops error :(", nil
+	return -1, "oops error :(", nil
 }
 
 func (s *tip) nextTip() int {

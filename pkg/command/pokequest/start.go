@@ -42,6 +42,7 @@ func newStart(pokeData *pokeData) *start {
 func (s *start) start() (string, error) {
 	s.pokeData.current = rand.Intn(s.pokeData.limit)
 	s.pokeData.tips = map[int]string{}
+	s.pokeData.points = 50
 	fmt.Println(s.pokeData.current)
 	return "Secret Pokemon I choose you! Use '!pokemon tip' to get tips about your Pokemon.", nil
 }
