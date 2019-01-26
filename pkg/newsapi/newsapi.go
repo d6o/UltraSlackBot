@@ -66,7 +66,6 @@ func (n *NewsAPI) Headlines(country, category, q string, pageSize, page int) (*H
 func (n *NewsAPI) Get(url string, params *url.Values, v interface{}) error {
 	params.Add("apiKey", n.key)
 	url = fmt.Sprintf("%s?%s", url, params.Encode())
-	fmt.Println(url)
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
 		return err
