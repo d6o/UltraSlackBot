@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 
+	"github.com/disiqueira/ultraslackbot/pkg/command/nba"
 	"github.com/disiqueira/ultraslackbot/pkg/command/pokequest"
 	"github.com/disiqueira/ultraslackbot/pkg/command/uptime"
 
@@ -157,6 +158,7 @@ func (a *App) Run(cmd *cobra.Command, args []string) {
 		watch.NewWatchCommand(seedrUsername.(string), seedrPassword.(string)),
 		pokequest.NewPokeQuestCommand(),
 		uptime.NewUptimeCommand(),
+		nba.NewNBACommand(),
 	}
 
 	handlerList := []bot.Handler{
