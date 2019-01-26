@@ -13,7 +13,7 @@ type (
 )
 
 const (
-	template = "%s (%s - %s) x %s (%s - %s)\n%s\n%s\n\n"
+	template = "%s (%s - %s) x %s (%s - %s)\n%s\n%s\n"
 )
 
 func NewNBACommand() *cobra.Command {
