@@ -160,7 +160,7 @@ func (a *App) Run(cmd *cobra.Command, args []string) {
 	}
 
 	handlerList := []bot.Handler{
-		logger.New(outLogger),
+		logger.New(),
 		admin.New(b),
 		command.New(commandList),
 	}

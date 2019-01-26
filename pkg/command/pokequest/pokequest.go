@@ -11,7 +11,7 @@ type (
 		current int
 		limit   int
 		tips    map[int]string
-		points int
+		points  int
 	}
 )
 
