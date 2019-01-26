@@ -2,6 +2,7 @@ package app
 
 import (
 	"context"
+	"github.com/disiqueira/ultraslackbot/pkg/command/news"
 	"log"
 	"os"
 
@@ -60,6 +61,7 @@ const (
 	afterShipKeyEnvName  = "AFTERSHIPKEY"
 	seedrUsernameEnvName = "SEEDRUSERNAME"
 	seedrPasswordEnvName = "SEEDRPASSWORD"
+	newsAPIKeyEnvName    = "NEWSAPIKEY"
 )
 
 func New() *App {
@@ -126,6 +128,12 @@ func (a *App) Run(cmd *cobra.Command, args []string) {
 		os.Exit(errorExitCode)
 	}
 
+	newsAPIKey, ok := specs.Get(newsAPIKeyEnvName)
+	if !ok {
+		errLogger.Printf("config missing %s", newsAPIKeyEnvName)
+		os.Exit(errorExitCode)
+	}
+
 	slackClient := slack.New(slackToken.(string))
 	b := bot.New(slackClient)
 
@@ -159,6 +167,7 @@ func (a *App) Run(cmd *cobra.Command, args []string) {
 		pokequest.NewPokeQuestCommand(),
 		uptime.NewUptimeCommand(),
 		nba.NewNBACommand(),
+		news.NewNewsCommand(newsAPIKey.(string)),
 	}
 
 	handlerList := []bot.Handler{

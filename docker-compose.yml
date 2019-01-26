@@ -16,6 +16,7 @@ services:
         - USB_CLARIFAIMODEL=${USB_CLARIFAIMODEL}
         - USB_SEEDRUSERNAME=${USB_SEEDRUSERNAME}
         - USB_SEEDRPASSWORD=${USB_SEEDRPASSWORD}
+        - USB_NEWSAPIKEY=${USB_NEWSAPIKEY}
     volumes:
       - .:/go/src/github.com/disiqueira/ultraslackbot
     environment:
@@ -29,3 +30,5 @@ services:
       USB_CLARIFAIMODEL: ${USB_CLARIFAIMODEL}
       USB_SEEDRUSERNAME: ${USB_SEEDRUSERNAME}
       USB_SEEDRPASSWORD: ${USB_SEEDRPASSWORD}
+      USB_NEWSAPIKEY: ${USB_NEWSAPIKEY}
+
