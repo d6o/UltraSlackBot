@@ -17,8 +17,9 @@ const (
 )
 
 func NewNBACommand() *cobra.Command {
+	client := nba.New()
 	n := nbaCommand{
-		client: nba.New(),
+		client: client,
 	}
 	c := &cobra.Command{
 		Use:   "nba",
@@ -26,6 +27,8 @@ func NewNBACommand() *cobra.Command {
 		Args:  cobra.NoArgs,
 		Run:   n.Games,
 	}
+
+	c.AddCommand(newTeamCommand(client))
 
 	return c
 }

@@ -11,3 +11,4 @@ func main() {
 	rand.Seed(time.Now().UTC().UnixNano())
 	cli.Execute()
 }
+

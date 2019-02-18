@@ -8,8 +8,9 @@ import (
 )
 
 const (
-	urlScoreboard = "http://data.nba.net/10s/prod/v1/%s/scoreboard.json"
-	urlTeams      = "http://data.nba.net/10s/prod/v2/2018/teams.json"
+	urlScoreboard  = "http://data.nba.net/10s/prod/v1/%s/scoreboard.json"
+	urlTeams       = "http://data.nba.net/10s/prod/v2/2018/teams.json"
+	urlStanding = "http://data.nba.net/10s/prod/v1/current/standings_all_no_sort_keys.json"
 )
 
 type (
@@ -22,11 +23,6 @@ type (
 	}
 
 	ScoreboardResponse struct {
-		Internal struct {
-			PubDateTime string `json:"pubDateTime"`
-			Xslt        string `json:"xslt"`
-			EventName   string `json:"eventName"`
-		} `json:"_internal"`
 		NumGames int `json:"numGames"`
 		Games    []struct {
 			SeasonStageID int    `json:"seasonStageId"`
@@ -198,7 +194,46 @@ type (
 		ConfName       string `json:"confName"`
 		DivName        string `json:"divName"`
 	}
+
+	StandingResponse struct {
+		League struct {
+			Standard struct {
+				SeasonYear    int `json:"seasonYear"`
+				SeasonStageID int `json:"seasonStageId"`
+				Teams         []struct {
+					TeamID                 string `json:"teamId"`
+					Win                    string `json:"win"`
+					Loss                   string `json:"loss"`
+					WinPct                 string `json:"winPct"`
+					WinPctV2               string `json:"winPctV2"`
+					LossPct                string `json:"lossPct"`
+					LossPctV2              string `json:"lossPctV2"`
+					GamesBehind            string `json:"gamesBehind"`
+					DivGamesBehind         string `json:"divGamesBehind"`
+					ClinchedPlayoffsCode   string `json:"clinchedPlayoffsCode"`
+					ClinchedPlayoffsCodeV2 string `json:"clinchedPlayoffsCodeV2"`
+					ConfRank               string `json:"confRank"`
+					ConfWin                string `json:"confWin"`
+					ConfLoss               string `json:"confLoss"`
+					DivWin                 string `json:"divWin"`
+					DivLoss                string `json:"divLoss"`
+					HomeWin                string `json:"homeWin"`
+					HomeLoss               string `json:"homeLoss"`
+					AwayWin                string `json:"awayWin"`
+					AwayLoss               string `json:"awayLoss"`
+					LastTenWin             string `json:"lastTenWin"`
+					LastTenLoss            string `json:"lastTenLoss"`
+					Streak                 string `json:"streak"`
+					DivRank                string `json:"divRank"`
+					IsWinStreak            bool   `json:"isWinStreak"`
+					TieBreakerPts          string `json:"tieBreakerPts"`
+				} `json:"teams"`
+			} `json:"standard"`
+		} `json:"league"`
+	}
+
 )
+
 
 func New() *NBA {
 	return &NBA{
@@ -219,6 +254,11 @@ func (n *NBA) Games(date time.Time) (*ScoreboardResponse, error) {
 func (n *NBA) Teams() (*TeamsResponse, error) {
 	response := &TeamsResponse{}
 	return response, n.Get(urlTeams, response)
+}
+
+func (n *NBA) Standing() (*StandingResponse, error) {
+	response := &StandingResponse{}
+	return response, n.Get(urlStanding, response)
 }
 
 func (n *NBA) Get(url string, v interface{}) error {
